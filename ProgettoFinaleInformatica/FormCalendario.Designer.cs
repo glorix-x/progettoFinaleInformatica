@@ -1,5 +1,5 @@
 ﻿namespace ProgettoFinaleInformatica {
-    partial class Form1 {
+    partial class FormCalendario {
         /// <summary>
         ///  Required designer variable.
         /// </summary>
@@ -23,12 +23,29 @@
         ///  the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            components = new System.ComponentModel.Container();
+            monthCalendar1 = new MonthCalendar();
+            SuspendLayout();
+            // 
+            // monthCalendar1
+            // 
+            monthCalendar1.CalendarDimensions = new Size(4, 2);
+            monthCalendar1.Location = new Point(122, 207);
+            monthCalendar1.Name = "monthCalendar1";
+            monthCalendar1.TabIndex = 0;
+            // 
+            // FormCalendario
+            // 
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(1543, 775);
+            Controls.Add(monthCalendar1);
+            Name = "FormCalendario";
             Text = "Form1";
+            ResumeLayout(false);
         }
 
         #endregion
+
+        private MonthCalendar monthCalendar1;
     }
 }
