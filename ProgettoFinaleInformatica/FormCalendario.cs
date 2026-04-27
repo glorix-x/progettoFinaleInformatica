@@ -3,5 +3,10 @@ namespace ProgettoFinaleInformatica {
         public FormCalendario() {
             InitializeComponent();
         }
+
+        private void monthCalendar1_DateSelected(object sender, DateRangeEventArgs e) {
+            DateTime day = e.Start;
+            
+        }
     }
 }
