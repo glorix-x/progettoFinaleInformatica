@@ -8,7 +8,9 @@ using System.Windows.Forms;
 
 namespace ProgettoFinaleInformatica {
     public partial class FormSettimana : Form {
-        public FormSettimana() {
+        private DateTime lunedi;
+        public FormSettimana(DateTime lunedi) {
+            this.lunedi = lunedi;
             InitializeComponent();
             for(int i = 0; i <= 24; i++) {
                 Label lbl = new Label();
