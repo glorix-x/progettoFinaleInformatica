@@ -8,11 +8,11 @@ using System.Text;
 using System.Windows.Forms;
 
 namespace ProgettoFinaleInformatica {
-    public partial class FormCreazioneImpegno : Form {
-        private List<Impegno> impegniAggiunti;
-        public FormCreazioneImpegno(List<Impegno> impegniAggiunti) {
+    public partial class FormModificaImpegno : Form {
+        private Impegno impegno;
+        public FormModificaImpegno(Impegno impegno) {
             InitializeComponent();
-            this.impegniAggiunti = impegniAggiunti;
+            this.impegno = impegno;
         }
     }
 }

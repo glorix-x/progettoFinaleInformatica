@@ -12,7 +12,8 @@ namespace ProgettoFinaleInformatica {
         private static string[] daysName = { "Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì", "Sabato", "Domenica" };
         private DateTime start;
         private List<Impegno> impegniAggiunti = new List<Impegno>();
-        private FormCreazioneImpegno formAttivo = null;
+        private FormCreazioneImpegno formCreazioneAttivo = null;
+        private FormModificaImpegno formModificaAttivo = null;
         public FormSettimana(DateTime start, List<Impegno> listaImpegni) {
             this.start = start;
             InitializeComponent();
@@ -25,7 +26,7 @@ namespace ProgettoFinaleInformatica {
             for(int i = 0; i < 24; i++) {
                 for(int j = 0; j < 7; j++) {
                     Button btn = new Button();
-                    btn.Tag = new int[] { j, i };
+                    btn.Tag = null;
                     btn.Name = j.ToString() + " " + i.ToString();
                     btn.Click += AggiungiImpegno;
                     grigliaSettimana.Controls.Add(btn);
@@ -54,24 +55,60 @@ namespace ProgettoFinaleInformatica {
                     grigliaSettimana.Controls.Remove((Button)grigliaSettimana.Controls.Find(((int)data.DayOfWeek - 1).ToString() + " " + (data.Hour + i), true)[0]);
                 }
                 grigliaSettimana.SetRowSpan(btn, impegno.DurataOre);
+                btn.Tag = impegno;
+                btn.Click -= AggiungiImpegno;
+                btn.Click += ModificaImpegno;
             }
         }
 
         public void AggiungiImpegno(object sender, EventArgs e) {
             Button btn = (Button)sender;
-            int[] coordinate = (int[])btn.Tag;
-            int numGiorno = coordinate[0];
-            int numOra = coordinate[1];
 
-            FormCreazioneImpegno form = new FormCreazioneImpegno();
-
-            if(formAttivo == null) {
-                formAttivo = form;
-            } else {
-                formAttivo.Close();
-                formAttivo = form;
+            string giorno = "";
+            string ora = "";
+            int numGiorno = 0;
+            int numOra = 0;
+            bool isOra = false;
+            
+            foreach(char c in btn.Name) {
+                if(c == ' ') {
+                    isOra = true;
+                    continue;
+                }
+                if(isOra) {
+                    ora += c;
+                } else {
+                    giorno += c;
+                }
             }
-            formAttivo.Show();
+
+            numGiorno = Convert.ToInt32(giorno);
+            numOra = Convert.ToInt32(ora);
+
+            FormCreazioneImpegno form = new FormCreazioneImpegno(impegniAggiunti);
+
+            if(formCreazioneAttivo == null) {
+                formCreazioneAttivo = form;
+            } else {
+                formCreazioneAttivo.Close();
+                formCreazioneAttivo = form;
+            }
+            formCreazioneAttivo.Show();
+        }
+
+        public void ModificaImpegno(object sender, EventArgs e) {
+            Button btn = (Button)sender;
+            Impegno impegno = (Impegno)btn.Tag;
+
+            FormModificaImpegno form = new FormModificaImpegno(impegno);
+
+            if(formModificaAttivo == null) {
+                formModificaAttivo = form;
+            } else {
+                formModificaAttivo.Close();
+                formModificaAttivo = form;
+            }
+            formModificaAttivo.Show();
         }
     }
 }
