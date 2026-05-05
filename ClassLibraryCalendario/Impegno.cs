@@ -1,20 +1,26 @@
 ﻿namespace ClassLibraryCalendario {
     public class Impegno {
-        private string title;
-        private string description;
+        private string titolo;
+        private string descrizione;
         private DateTime deadline;
-        private DateTime scheduledDate;
+        private DateTime dataFissata;
+        private int durataOre;
+        private bool fisso;
 
-        public Impegno(string title, string description, DateTime deadline, DateTime scheduledDate) {
-            this.title = title;
-            this.description = description;
+        public Impegno(string titolo, string descrizione, DateTime deadline, DateTime dataFissata, int durataOre, bool fisso) {
+            this.titolo = titolo;
+            this.descrizione = descrizione;
             this.deadline = deadline;
-            this.scheduledDate = scheduledDate;
+            this.dataFissata = dataFissata;
+            this.durataOre = durataOre;
+            this.fisso = fisso;
         }
 
-        public string Title { get => title; set => title = value; }
-        public string Description { get => description; set => description = value; }
+        public string Titolo { get => titolo; set => titolo = value; }
+        public string Descrizione { get => descrizione; set => descrizione = value; }
         public DateTime Deadline { get => deadline; set => deadline = value; }
-        public DateTime ScheduledDate { get => scheduledDate; set => scheduledDate = value; }
+        public DateTime DataFissata { get => dataFissata; set => dataFissata = value; }
+        public int DurataOre { get => durataOre; set => durataOre = value; }
+        public bool Fisso { get => fisso; set => fisso = value; }
     }
 }

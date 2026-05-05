@@ -78,21 +78,21 @@
             // 
             lblLunedi.AutoSize = true;
             lblLunedi.Font = new Font("Segoe UI", 15F);
-            lblLunedi.Location = new Point(153, 0);
+            lblLunedi.Location = new Point(131, 0);
             lblLunedi.Name = "lblLunedi";
-            lblLunedi.Size = new Size(107, 41);
+            lblLunedi.Size = new Size(90, 41);
             lblLunedi.TabIndex = 1;
-            lblLunedi.Text = "Lunedì";
+            lblLunedi.Text = "         ";
             // 
             // lblMartedi
             // 
             lblMartedi.AutoSize = true;
             lblMartedi.Font = new Font("Segoe UI", 15F);
-            lblMartedi.Location = new Point(336, 0);
+            lblMartedi.Location = new Point(319, 0);
             lblMartedi.Name = "lblMartedi";
-            lblMartedi.Size = new Size(121, 41);
+            lblMartedi.Size = new Size(90, 41);
             lblMartedi.TabIndex = 2;
-            lblMartedi.Text = "Martedì";
+            lblMartedi.Text = "         ";
             // 
             // lblMercoledi
             // 
@@ -100,49 +100,49 @@
             lblMercoledi.Font = new Font("Segoe UI", 15F);
             lblMercoledi.Location = new Point(505, 0);
             lblMercoledi.Name = "lblMercoledi";
-            lblMercoledi.Size = new Size(151, 41);
+            lblMercoledi.Size = new Size(90, 41);
             lblMercoledi.TabIndex = 3;
-            lblMercoledi.Text = "Mercoledì";
+            lblMercoledi.Text = "         ";
             // 
             // lblGiovedi
             // 
             lblGiovedi.AutoSize = true;
             lblGiovedi.Font = new Font("Segoe UI", 15F);
-            lblGiovedi.Location = new Point(714, 0);
+            lblGiovedi.Location = new Point(695, 0);
             lblGiovedi.Name = "lblGiovedi";
-            lblGiovedi.Size = new Size(119, 41);
+            lblGiovedi.Size = new Size(90, 41);
             lblGiovedi.TabIndex = 4;
-            lblGiovedi.Text = "Giovedì";
+            lblGiovedi.Text = "         ";
             // 
             // lblVenerdi
             // 
             lblVenerdi.AutoSize = true;
             lblVenerdi.Font = new Font("Segoe UI", 15F);
-            lblVenerdi.Location = new Point(898, 0);
+            lblVenerdi.Location = new Point(883, 0);
             lblVenerdi.Name = "lblVenerdi";
-            lblVenerdi.Size = new Size(119, 41);
+            lblVenerdi.Size = new Size(90, 41);
             lblVenerdi.TabIndex = 5;
-            lblVenerdi.Text = "Venerdì";
+            lblVenerdi.Text = "         ";
             // 
             // lblSabato
             // 
             lblSabato.AutoSize = true;
             lblSabato.Font = new Font("Segoe UI", 15F);
-            lblSabato.Location = new Point(1087, 0);
+            lblSabato.Location = new Point(1067, 0);
             lblSabato.Name = "lblSabato";
-            lblSabato.Size = new Size(110, 41);
+            lblSabato.Size = new Size(90, 41);
             lblSabato.TabIndex = 6;
-            lblSabato.Text = "Sabato";
+            lblSabato.Text = "         ";
             // 
             // lblDomenica
             // 
             lblDomenica.AutoSize = true;
             lblDomenica.Font = new Font("Segoe UI", 15F);
-            lblDomenica.Location = new Point(1258, 0);
+            lblDomenica.Location = new Point(1245, 0);
             lblDomenica.Name = "lblDomenica";
-            lblDomenica.Size = new Size(152, 41);
+            lblDomenica.Size = new Size(90, 41);
             lblDomenica.TabIndex = 7;
-            lblDomenica.Text = "Domenica";
+            lblDomenica.Text = "         ";
             // 
             // FormSettimana
             // 
