@@ -11,12 +11,15 @@ namespace ProgettoFinaleInformatica {
     public partial class FormSettimana : Form {
         private static string[] daysName = { "Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì", "Sabato", "Domenica" };
         private DateTime start;
-        private List<Impegno> impegniAggiunti = new List<Impegno>();
         private FormCreazioneImpegno formCreazioneAttivo = null;
         private FormModificaImpegno formModificaAttivo = null;
-        public FormSettimana(DateTime start, List<Impegno> listaImpegni) {
-            this.start = start;
+        private GestoreImpegni gestore;
+
+        public FormSettimana(DateTime start, GestoreImpegni gestore) {
             InitializeComponent();
+            this.start = start;
+            this.gestore = gestore;
+
             for(int i = 0; i <= 24; i++) {
                 Label lbl = new Label();
                 lbl.Location = new Point(grigliaSettimana.Location.X - 70, grigliaSettimana.Location.Y - 12 + i * grigliaSettimana.Height / 24);
@@ -47,18 +50,25 @@ namespace ProgettoFinaleInformatica {
             lblSabato.Text = "Sab " + (day.Day.ToString().Length == 1 ? "0" : "") + day.Day + "/" + (day.Month.ToString().Length == 1 ? "0" : "") + day.Month;
             day = day.AddDays(1);
             lblDomenica.Text = "Dom " + (day.Day.ToString().Length == 1 ? "0" : "") + day.Day + "/" + (day.Month.ToString().Length == 1 ? "0" : "") + day.Month;
-            
+
+            List<Impegno> listaImpegni = gestore.GetListaImpegniSettimana(start);
+
             foreach(Impegno impegno in listaImpegni) {
-                DateTime data = impegno.DataFissata;
-                Button btn = (Button)grigliaSettimana.Controls.Find(((int)data.DayOfWeek - 1).ToString() + " " + data.Hour, true)[0];
-                for(int i = 1; i < impegno.DurataOre; i++) {
-                    grigliaSettimana.Controls.Remove((Button)grigliaSettimana.Controls.Find(((int)data.DayOfWeek - 1).ToString() + " " + (data.Hour + i), true)[0]);
-                }
-                grigliaSettimana.SetRowSpan(btn, impegno.DurataOre);
-                btn.Tag = impegno;
-                btn.Click -= AggiungiImpegno;
-                btn.Click += ModificaImpegno;
+                SetImpegno(impegno);
             }
+        }
+
+        public void SetImpegno(Impegno impegno) {
+            this.Hide();
+            DateTime data = impegno.DataFissata;
+            Button btn = (Button)grigliaSettimana.Controls.Find(((int)data.DayOfWeek - 1).ToString() + " " + data.Hour, true)[0];
+            for(int i = 1; i < impegno.DurataOre; i++) {
+                grigliaSettimana.Controls.Remove((Button)grigliaSettimana.Controls.Find(((int)data.DayOfWeek - 1).ToString() + " " + (data.Hour + i), true)[0]);
+            }
+            grigliaSettimana.SetRowSpan(btn, impegno.DurataOre);
+            btn.Tag = impegno;
+            btn.Click -= AggiungiImpegno;
+            btn.Click += ModificaImpegno;
         }
 
         public void AggiungiImpegno(object sender, EventArgs e) {
@@ -85,7 +95,8 @@ namespace ProgettoFinaleInformatica {
             numGiorno = Convert.ToInt32(giorno);
             numOra = Convert.ToInt32(ora);
 
-            FormCreazioneImpegno form = new FormCreazioneImpegno(impegniAggiunti);
+            DateTime giornoOra = new DateTime(start.Year, start.Month, start.AddDays(numGiorno).Day, numOra, 0, 0);
+            FormCreazioneImpegno form = new FormCreazioneImpegno(giornoOra, gestore, this);
 
             if(formCreazioneAttivo == null) {
                 formCreazioneAttivo = form;

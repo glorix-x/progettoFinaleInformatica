@@ -27,8 +27,9 @@
             lblTitolo = new Label();
             rtbDescrizione = new RichTextBox();
             lblDescrizione = new Label();
-            txtDurata = new TextBox();
             lblDurata = new Label();
+            btnSalva = new Button();
+            cbDurata = new ComboBox();
             SuspendLayout();
             // 
             // txtTitolo
@@ -64,13 +65,6 @@
             lblDescrizione.TabIndex = 3;
             lblDescrizione.Text = "Descrizione:";
             // 
-            // txtDurata
-            // 
-            txtDurata.Location = new Point(320, 376);
-            txtDurata.Name = "txtDurata";
-            txtDurata.Size = new Size(150, 31);
-            txtDurata.TabIndex = 4;
-            // 
             // lblDurata
             // 
             lblDurata.AutoSize = true;
@@ -80,13 +74,32 @@
             lblDurata.TabIndex = 5;
             lblDurata.Text = "Durata in ore:";
             // 
+            // btnSalva
+            // 
+            btnSalva.Location = new Point(337, 445);
+            btnSalva.Name = "btnSalva";
+            btnSalva.Size = new Size(112, 34);
+            btnSalva.TabIndex = 6;
+            btnSalva.Text = "SALVA";
+            btnSalva.UseVisualStyleBackColor = true;
+            btnSalva.Click += btnSalva_Click;
+            // 
+            // cbDurata
+            // 
+            cbDurata.FormattingEnabled = true;
+            cbDurata.Location = new Point(303, 379);
+            cbDurata.Name = "cbDurata";
+            cbDurata.Size = new Size(182, 33);
+            cbDurata.TabIndex = 7;
+            // 
             // FormCreazioneImpegno
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(800, 521);
+            Controls.Add(cbDurata);
+            Controls.Add(btnSalva);
             Controls.Add(lblDurata);
-            Controls.Add(txtDurata);
             Controls.Add(lblDescrizione);
             Controls.Add(rtbDescrizione);
             Controls.Add(lblTitolo);
@@ -103,7 +116,8 @@
         private Label lblTitolo;
         private RichTextBox rtbDescrizione;
         private Label lblDescrizione;
-        private TextBox txtDurata;
         private Label lblDurata;
+        private Button btnSalva;
+        private ComboBox cbDurata;
     }
 }

@@ -14,14 +14,15 @@ namespace ProgettoFinaleInformatica {
             DateTime day = e.Start;
             int differenza = (7 + day.DayOfWeek - DayOfWeek.Monday) % 7;
             day = day.AddDays(-differenza).Date;
-            FormSettimana formSettimana = new FormSettimana(day, gestore.GetListaImpegniSettimana(day));
-            if(formAttivo == null) {
-                formAttivo = formSettimana;
-            } else {
+            if(formAttivo != null) {
                 formAttivo.Close();
-                formAttivo = formSettimana;
             }
+            formAttivo = new FormSettimana(day, gestore);
             formAttivo.Show();
+        }
+
+        public void SaveData() {
+            gestore.SaveData();
         }
     }
 }
