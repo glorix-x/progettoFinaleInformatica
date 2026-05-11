@@ -42,7 +42,7 @@ namespace ProgettoFinaleInformatica {
             string titolo = txtTitolo.Text;
             string descrizione = rtbDescrizione.Text;
             int durata = Convert.ToInt32(cbDurata.Text);
-            if(titolo.Trim() == "" && descrizione.Trim() == "") {
+            if(titolo.Trim() == "" || descrizione.Trim() == "") {
                 MessageBox.Show("Compilare tutti i campi");
             } else {
                 Impegno nuovoImpegno = new Impegno(titolo, descrizione, giorno, giorno, durata, true);
