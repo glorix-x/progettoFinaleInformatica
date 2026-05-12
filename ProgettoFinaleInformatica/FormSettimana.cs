@@ -29,6 +29,9 @@ namespace ProgettoFinaleInformatica {
             for(int i = 0; i < 24; i++) {
                 for(int j = 0; j < 7; j++) {
                     Button btn = new Button();
+                    btn.Cursor = Cursors.Hand;
+                    btn.Padding = new Padding(0);
+                    btn.Margin = new Padding(0);
                     btn.Tag = null;
                     btn.Name = j.ToString() + " " + i.ToString();
                     btn.Click += AggiungiImpegno;
@@ -67,6 +70,7 @@ namespace ProgettoFinaleInformatica {
             }
             grigliaSettimana.SetRowSpan(btn, impegno.DurataOre);
             btn.Tag = impegno;
+            btn.Text = impegno.ToString();
             btn.Click -= AggiungiImpegno;
             btn.Click += ModificaImpegno;
         }
@@ -113,12 +117,10 @@ namespace ProgettoFinaleInformatica {
 
             FormModificaImpegno form = new FormModificaImpegno(impegno);
 
-            if(formModificaAttivo == null) {
-                formModificaAttivo = form;
-            } else {
+            if(formModificaAttivo != null) {
                 formModificaAttivo.Close();
-                formModificaAttivo = form;
             }
+            formModificaAttivo = form;
             formModificaAttivo.Show();
         }
     }

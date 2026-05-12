@@ -22,5 +22,13 @@
         public DateTime DataFissata { get => dataFissata; set => dataFissata = value; }
         public int DurataOre { get => durataOre; set => durataOre = value; }
         public bool Fisso { get => fisso; set => fisso = value; }
+
+        public override string ToString() {
+            string s = "";
+            s += titolo + "\n";
+            s += descrizione + "\n";
+            s += (dataFissata.Hour.ToString().Length == 1 ? "0" : "") + dataFissata.Hour.ToString() + ":00 - " + ((dataFissata.Hour + durataOre).ToString().Length == 1 ? "0" : "") + (dataFissata.Hour + durataOre).ToString() + ":00";
+            return s;
+        }
     }
 }
