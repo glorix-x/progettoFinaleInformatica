@@ -27,8 +27,12 @@
             string s = "";
             s += titolo + "\n";
             s += descrizione + "\n";
-            s += (dataFissata.Hour.ToString().Length == 1 ? "0" : "") + dataFissata.Hour.ToString() + ":00 - " + ((dataFissata.Hour + durataOre).ToString().Length == 1 ? "0" : "") + (dataFissata.Hour + durataOre).ToString() + ":00";
+            s += GetStringHour();
             return s;
+        }
+
+        public string GetStringHour() {
+            return (dataFissata.Hour.ToString().Length == 1 ? "0" : "") + dataFissata.Hour.ToString() + ":00 - " + ((dataFissata.Hour + durataOre).ToString().Length == 1 ? "0" : "") + (dataFissata.Hour + durataOre).ToString() + ":00";
         }
     }
 }

@@ -29,36 +29,49 @@ namespace ProgettoFinaleInformatica {
             for(int i = 0; i < 24; i++) {
                 for(int j = 0; j < 7; j++) {
                     Button btn = new Button();
-                    btn.Cursor = Cursors.Hand;
-                    btn.Padding = new Padding(0);
-                    btn.Margin = new Padding(0);
+                    SetStyleForBlankBtn(btn);
                     btn.Tag = null;
                     btn.Name = j.ToString() + " " + i.ToString();
                     btn.Click += AggiungiImpegno;
                     grigliaSettimana.Controls.Add(btn);
-                    btn.Dock = DockStyle.Fill;
                 }
             }
             DateTime day = start;
-            lblLunedi.Text = "Lun " + (day.Day.ToString().Length == 1 ? "0" : "") + day.Day + "/" + (day.Month.ToString().Length == 1 ? "0" : "") + day.Month;
-            day = day.AddDays(1);
-            lblMartedi.Text = "Mar " + (day.Day.ToString().Length == 1 ? "0" : "") + day.Day + "/" + (day.Month.ToString().Length == 1 ? "0" : "") + day.Month;
-            day = day.AddDays(1);
-            lblMercoledi.Text = "Mer " + (day.Day.ToString().Length == 1 ? "0" : "") + day.Day + "/" + (day.Month.ToString().Length == 1 ? "0" : "") + day.Month;
-            day = day.AddDays(1);
-            lblGiovedi.Text = "Gio " + (day.Day.ToString().Length == 1 ? "0" : "") + day.Day + "/" + (day.Month.ToString().Length == 1 ? "0" : "") + day.Month;
-            day = day.AddDays(1);
-            lblVenerdi.Text = "Ven " + (day.Day.ToString().Length == 1 ? "0" : "") + day.Day + "/" + (day.Month.ToString().Length == 1 ? "0" : "") + day.Month;
-            day = day.AddDays(1);
-            lblSabato.Text = "Sab " + (day.Day.ToString().Length == 1 ? "0" : "") + day.Day + "/" + (day.Month.ToString().Length == 1 ? "0" : "") + day.Month;
-            day = day.AddDays(1);
-            lblDomenica.Text = "Dom " + (day.Day.ToString().Length == 1 ? "0" : "") + day.Day + "/" + (day.Month.ToString().Length == 1 ? "0" : "") + day.Month;
+            List<string> strGiorni = new List<string>() { "Lun", "Mar", "Mer", "Gio", "Ven", "Sab", "Dom" };
+            List<Label> labelGiorni = new List<Label>() { lblLunedi, lblMartedi, lblMercoledi, lblGiovedi, lblVenerdi, lblSabato, lblDomenica };
+
+            for(int i = 0; i < 7; i++) {
+                labelGiorni[i].Text = strGiorni[i] + " " + (day.Day.ToString().Length == 1 ? "0" : "") + day.Day + "/" + (day.Month.ToString().Length == 1 ? "0" : "") + day.Month;
+                day = day.AddDays(1);
+            }
 
             List<Impegno> listaImpegni = gestore.GetListaImpegniSettimana(start);
 
             foreach(Impegno impegno in listaImpegni) {
                 SetImpegno(impegno);
             }
+        }
+
+        private void SetStyleForBlankBtn(Button btn) {
+            btn.Cursor = Cursors.Hand;
+            btn.Padding = new Padding(0);
+            btn.Margin = new Padding(0);
+            btn.Dock = DockStyle.Fill;
+            btn.FlatStyle = FlatStyle.Flat;
+        }
+
+        private void SetStyleForOccupiedBtn(Button btn) {
+            Color normalColor = Color.FromArgb(120, 190, 230);
+            Color hoverColor = Color.FromArgb(130, 200, 240);
+
+            btn.BackColor = normalColor;
+
+            btn.MouseEnter += (s, e) => {
+                btn.BackColor = hoverColor;
+            };
+            btn.MouseLeave += (s, e) => {
+                btn.BackColor = normalColor;
+            };
         }
 
         public void SetImpegno(Impegno impegno) {
@@ -71,6 +84,7 @@ namespace ProgettoFinaleInformatica {
             grigliaSettimana.SetRowSpan(btn, impegno.DurataOre);
             btn.Tag = impegno;
             btn.Text = impegno.ToString();
+            SetStyleForOccupiedBtn(btn);
             btn.Click -= AggiungiImpegno;
             btn.Click += ModificaImpegno;
         }

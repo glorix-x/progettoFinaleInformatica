@@ -71,7 +71,7 @@
             grigliaSettimana.RowStyles.Add(new RowStyle(SizeType.Percent, 4.346767F));
             grigliaSettimana.RowStyles.Add(new RowStyle(SizeType.Percent, 4.346767F));
             grigliaSettimana.RowStyles.Add(new RowStyle(SizeType.Absolute, 21F));
-            grigliaSettimana.Size = new Size(1310, 828);
+            grigliaSettimana.Size = new Size(1310, 840);
             grigliaSettimana.TabIndex = 0;
             // 
             // lblLunedi
@@ -148,7 +148,7 @@
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1572, 884);
+            ClientSize = new Size(1572, 912);
             Controls.Add(lblDomenica);
             Controls.Add(lblSabato);
             Controls.Add(lblVenerdi);
