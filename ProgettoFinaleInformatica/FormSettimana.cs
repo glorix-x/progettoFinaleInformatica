@@ -20,10 +20,10 @@ namespace ProgettoFinaleInformatica {
             this.start = start;
             this.gestore = gestore;
 
-            for(int i = 0; i <= 24; i++) {
+            for(int i = 0; i < 24; i++) {
                 Label lbl = new Label();
-                lbl.Location = new Point(grigliaSettimana.Location.X - 70, grigliaSettimana.Location.Y - 12 + i * grigliaSettimana.Height / 24);
                 lbl.Text = (i.ToString().Length == 1 ? "0" : "") + i.ToString() + ":00";
+                lbl.Location = new Point(grigliaSettimana.Location.X - 70, grigliaSettimana.Location.Y + 2 + i * grigliaSettimana.Height / 24);
                 Controls.Add(lbl);
             }
             for(int i = 0; i < 24; i++) {
