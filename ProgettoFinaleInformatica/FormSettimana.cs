@@ -51,7 +51,6 @@ namespace ProgettoFinaleInformatica {
                     btn.Tag = null;
                     btn.Name = j.ToString() + " " + i.ToString();
                     btn.Click += AggiungiImpegno;
-                    btn.Font = new Font(new Font("Cambria", 20), FontStyle.Regular);
                     grigliaSettimana.Controls.Add(btn);
                 }
             }
@@ -66,6 +65,7 @@ namespace ProgettoFinaleInformatica {
                 int cellWidth = grigliaSettimana.Size.Width / 7;
                 lbl.Text = strGiorni[i] + " " + (day.Day.ToString().Length == 1 ? "0" : "") + day.Day + "/" + (day.Month.ToString().Length == 1 ? "0" : "") + day.Month;
                 lbl.Location = new Point(grigliaSettimana.Location.X + (cellWidth - lbl.Size.Width) / 2 + cellWidth * i, lbl.Location.Y);
+                lbl.Font = new Font(this.Font.FontFamily, 20);
                 day = day.AddDays(1);
             }
 
