@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace ProgettoFinaleInformatica {
     public partial class FormSettimana : Form {
-        private static string[] daysName = { "Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì", "Sabato", "Domenica" };
+        private static string[] daysName = { "Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì", "Sabto", "Domenica" };
         private DateTime start;
         private FormCreazioneImpegno formCreazioneAttivo = null;
         private FormModificaImpegno formModificaAttivo = null;
@@ -129,7 +129,7 @@ namespace ProgettoFinaleInformatica {
             Button btn = (Button)sender;
             Impegno impegno = (Impegno)btn.Tag;
 
-            FormModificaImpegno form = new FormModificaImpegno(impegno);
+            FormModificaImpegno form = new FormModificaImpegno(impegno, gestore);
 
             if(formModificaAttivo != null) {
                 formModificaAttivo.Close();
