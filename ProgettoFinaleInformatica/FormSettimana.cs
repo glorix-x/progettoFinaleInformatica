@@ -23,20 +23,27 @@ namespace ProgettoFinaleInformatica {
 
             int height = Screen.PrimaryScreen.Bounds.Height - grigliaSettimana.Location.Y - 250;
 
+            //Metto la grandezza della griglia in base a quella dello schermo
+            //e faccio in modo che il numero di pixel sia divisibile per 24 per
+            //avere le righe tutte uguali
             grigliaSettimana.Height = height - height % 24;
             grigliaSettimana.Width = Screen.PrimaryScreen.Bounds.Width - grigliaSettimana.Location.X - 140;
 
+            //Rendo tutte le righe alte uguali
             foreach(RowStyle row in grigliaSettimana.RowStyles) {
                 row.SizeType = SizeType.Absolute;
                 row.Height = grigliaSettimana.Height / 24 - 1;
             }
 
+            //Creo tutte le label degli orari
             for(int i = 0; i < 24; i++) {
                 Label lbl = new Label();
                 lbl.Text = (i.ToString().Length == 1 ? "0" : "") + i.ToString() + ":00";
                 lbl.Location = new Point(grigliaSettimana.Location.X - 70, grigliaSettimana.Location.Y + (grigliaSettimana.Height / 24 - lbl.Size.Height) / 2 + i * grigliaSettimana.Height / 24);
                 Controls.Add(lbl);
             }
+
+            //Aggiungo tutti i button nella griglia
             for(int i = 0; i < 24; i++) {
                 for(int j = 0; j < 7; j++) {
                     Button btn = new Button();
@@ -53,6 +60,7 @@ namespace ProgettoFinaleInformatica {
             List<string> strGiorni = new List<string>() { "Lun", "Mar", "Mer", "Gio", "Ven", "Sab", "Dom" };
             List<Label> labelGiorni = new List<Label>() { lblLunedi, lblMartedi, lblMercoledi, lblGiovedi, lblVenerdi, lblSabato, lblDomenica };
 
+            //Aggiungo tutte le label sopra le colonne della griglia
             for(int i = 0; i < 7; i++) {
                 Label lbl = labelGiorni[i];
                 int cellWidth = grigliaSettimana.Size.Width / 7;
@@ -61,6 +69,7 @@ namespace ProgettoFinaleInformatica {
                 day = day.AddDays(1);
             }
 
+            //Prendo tutti gli impegni della settimana e li inserisco
             List<Impegno> listaImpegni = gestore.GetListaImpegniSettimana(start);
 
             foreach(Impegno impegno in listaImpegni) {
@@ -84,9 +93,12 @@ namespace ProgettoFinaleInformatica {
             this.Hide();
             DateTime data = impegno.DataFissata;
             Button btn = (Button)grigliaSettimana.Controls.Find(((int)data.DayOfWeek - 1).ToString() + " " + data.Hour, true)[0];
+            
+            //Rimuovo tutti i button che vanno rimossi dopo quello corrente
             for(int i = 1; i < impegno.DurataOre; i++) {
                 grigliaSettimana.Controls.Remove((Button)grigliaSettimana.Controls.Find(((int)data.DayOfWeek - 1).ToString() + " " + (data.Hour + i), true)[0]);
             }
+            //Allargo verticalmente il button
             grigliaSettimana.SetRowSpan(btn, impegno.DurataOre);
             btn.Tag = impegno;
             btn.Text = impegno.ToString();

@@ -22,11 +22,14 @@ namespace ProgettoFinaleInformatica {
 
             int numOreMax = 0;
 
+            //Preso il prossimo impegno determino il numero di ore massime che può durare l'impegno da creare
             Impegno prossimoImpegno = gestore.GetNextImpegno(giorno);
             if(prossimoImpegno != null && prossimoImpegno.DataFissata.Date.CompareTo(giorno.Date) == 0) {
+                //Se il prossimo impegno è nello stesso giorno conto la differenza di ore
                 DateTime oraProssimoImpegno = prossimoImpegno.DataFissata;
                 numOreMax = oraProssimoImpegno.Hour - giorno.Hour;
             } else {
+                //Altrimenti conto le ore fino alla fine della giornata
                 numOreMax = 24 - giorno.Hour;
             }
 
@@ -45,9 +48,12 @@ namespace ProgettoFinaleInformatica {
             string descrizione = rtbDescrizione.Text;
             int durata = Convert.ToInt32(cbDurata.Text);
             Color colore = listaColori[cbColore.SelectedIndex];
+
+            //Controllo che siano stati compilati tutti i campi
             if(titolo.Trim() == "" || descrizione.Trim() == "") {
                 MessageBox.Show("Compilare tutti i campi");
             } else {
+                //Creo l'impegno e lo aggiungo al gestore e alla griglia
                 Impegno nuovoImpegno = new Impegno(titolo, descrizione, giorno, giorno, durata, true, ColoreHex(colore));
                 gestore.AddImpegno(nuovoImpegno);
                 form.SetImpegno(nuovoImpegno);
