@@ -37,6 +37,7 @@
             btSalvaM.TabIndex = 3;
             btSalvaM.Text = "Salva";
             btSalvaM.UseVisualStyleBackColor = true;
+            btSalvaM.Click += btSalvaM_Click;
             // 
             // btElliminaM
             // 
@@ -49,9 +50,9 @@
             // 
             // ucModifica
             // 
-            ucModifica.Location = new Point(171, -4);
+            ucModifica.Location = new Point(137, -4);
             ucModifica.Name = "ucModifica";
-            ucModifica.Size = new Size(361, 366);
+            ucModifica.Size = new Size(463, 366);
             ucModifica.TabIndex = 5;
             // 
             // FormModificaImpegno

@@ -28,27 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label3 = new Label();
             label2 = new Label();
             label1 = new Label();
-            cbOreM = new ComboBox();
             rtbDescrizioneM = new RichTextBox();
             tbTitoloM = new TextBox();
+            label4 = new Label();
+            cbColore = new ComboBox();
+            cbDurata = new ComboBox();
+            lblDurata = new Label();
             SuspendLayout();
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new Point(134, 283);
-            label3.Name = "label3";
-            label3.Size = new Size(85, 20);
-            label3.TabIndex = 15;
-            label3.Text = "Durata Ore:";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(153, 25);
+            label2.Location = new Point(218, 26);
             label2.Name = "label2";
             label2.Size = new Size(51, 20);
             label2.TabIndex = 14;
@@ -57,23 +50,15 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(134, 90);
+            label1.Location = new Point(199, 91);
             label1.Name = "label1";
             label1.Size = new Size(89, 20);
             label1.TabIndex = 13;
             label1.Text = "Descrizione:";
             // 
-            // cbOreM
-            // 
-            cbOreM.FormattingEnabled = true;
-            cbOreM.Location = new Point(98, 306);
-            cbOreM.Name = "cbOreM";
-            cbOreM.Size = new Size(151, 28);
-            cbOreM.TabIndex = 12;
-            // 
             // rtbDescrizioneM
             // 
-            rtbDescrizioneM.Location = new Point(26, 113);
+            rtbDescrizioneM.Location = new Point(91, 114);
             rtbDescrizioneM.Name = "rtbDescrizioneM";
             rtbDescrizioneM.Size = new Size(304, 154);
             rtbDescrizioneM.TabIndex = 11;
@@ -81,34 +66,73 @@
             // 
             // tbTitoloM
             // 
-            tbTitoloM.Location = new Point(98, 48);
+            tbTitoloM.Location = new Point(163, 49);
             tbTitoloM.Name = "tbTitoloM";
             tbTitoloM.Size = new Size(151, 27);
             tbTitoloM.TabIndex = 10;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(278, 278);
+            label4.Name = "label4";
+            label4.Size = new Size(129, 20);
+            label4.TabIndex = 16;
+            label4.Text = "Modifica il colore:";
+            // 
+            // cbColore
+            // 
+            cbColore.FormattingEnabled = true;
+            cbColore.Location = new Point(268, 312);
+            cbColore.Name = "cbColore";
+            cbColore.Size = new Size(151, 28);
+            cbColore.TabIndex = 17;
+            // 
+            // cbDurata
+            // 
+            cbDurata.FormattingEnabled = true;
+            cbDurata.Location = new Point(62, 312);
+            cbDurata.Margin = new Padding(2);
+            cbDurata.Name = "cbDurata";
+            cbDurata.Size = new Size(146, 28);
+            cbDurata.TabIndex = 19;
+            // 
+            // lblDurata
+            // 
+            lblDurata.AutoSize = true;
+            lblDurata.Location = new Point(90, 278);
+            lblDurata.Margin = new Padding(2, 0, 2, 0);
+            lblDurata.Name = "lblDurata";
+            lblDurata.Size = new Size(99, 20);
+            lblDurata.TabIndex = 18;
+            lblDurata.Text = "Durata in ore:";
             // 
             // UserControlModifica
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(label3);
+            Controls.Add(cbDurata);
+            Controls.Add(lblDurata);
+            Controls.Add(cbColore);
+            Controls.Add(label4);
             Controls.Add(label2);
             Controls.Add(label1);
-            Controls.Add(cbOreM);
             Controls.Add(rtbDescrizioneM);
             Controls.Add(tbTitoloM);
             Name = "UserControlModifica";
-            Size = new Size(367, 377);
+            Size = new Size(483, 377);
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-
-        private Label label3;
         private Label label2;
         private Label label1;
-        private ComboBox cbOreM;
         private RichTextBox rtbDescrizioneM;
         private TextBox tbTitoloM;
+        private Label label4;
+        private ComboBox cbColore;
+        private ComboBox cbDurata;
+        private Label lblDurata;
     }
 }

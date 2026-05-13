@@ -22,7 +22,8 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() {
+        private void InitializeComponent()
+        {
             txtTitolo = new TextBox();
             lblTitolo = new Label();
             rtbDescrizione = new RichTextBox();
@@ -36,51 +37,57 @@
             // 
             // txtTitolo
             // 
-            txtTitolo.Location = new Point(320, 67);
+            txtTitolo.Location = new Point(256, 54);
+            txtTitolo.Margin = new Padding(2, 2, 2, 2);
             txtTitolo.Name = "txtTitolo";
-            txtTitolo.Size = new Size(150, 31);
+            txtTitolo.Size = new Size(121, 27);
             txtTitolo.TabIndex = 0;
             // 
             // lblTitolo
             // 
             lblTitolo.AutoSize = true;
-            lblTitolo.Location = new Point(360, 26);
+            lblTitolo.Location = new Point(288, 21);
+            lblTitolo.Margin = new Padding(2, 0, 2, 0);
             lblTitolo.Name = "lblTitolo";
-            lblTitolo.Size = new Size(61, 25);
+            lblTitolo.Size = new Size(51, 20);
             lblTitolo.TabIndex = 1;
             lblTitolo.Text = "Titolo:";
             // 
             // rtbDescrizione
             // 
-            rtbDescrizione.Location = new Point(207, 159);
+            rtbDescrizione.Location = new Point(166, 130);
+            rtbDescrizione.Margin = new Padding(2, 2, 2, 2);
             rtbDescrizione.Name = "rtbDescrizione";
-            rtbDescrizione.Size = new Size(384, 161);
+            rtbDescrizione.Size = new Size(308, 130);
             rtbDescrizione.TabIndex = 2;
             rtbDescrizione.Text = "";
             // 
             // lblDescrizione
             // 
             lblDescrizione.AutoSize = true;
-            lblDescrizione.Location = new Point(337, 120);
+            lblDescrizione.Location = new Point(270, 96);
+            lblDescrizione.Margin = new Padding(2, 0, 2, 0);
             lblDescrizione.Name = "lblDescrizione";
-            lblDescrizione.Size = new Size(106, 25);
+            lblDescrizione.Size = new Size(89, 20);
             lblDescrizione.TabIndex = 3;
             lblDescrizione.Text = "Descrizione:";
             // 
             // lblDurata
             // 
             lblDurata.AutoSize = true;
-            lblDurata.Location = new Point(207, 342);
+            lblDurata.Location = new Point(166, 274);
+            lblDurata.Margin = new Padding(2, 0, 2, 0);
             lblDurata.Name = "lblDurata";
-            lblDurata.Size = new Size(119, 25);
+            lblDurata.Size = new Size(99, 20);
             lblDurata.TabIndex = 5;
             lblDurata.Text = "Durata in ore:";
             // 
             // btnSalva
             // 
-            btnSalva.Location = new Point(337, 445);
+            btnSalva.Location = new Point(270, 356);
+            btnSalva.Margin = new Padding(2, 2, 2, 2);
             btnSalva.Name = "btnSalva";
-            btnSalva.Size = new Size(112, 34);
+            btnSalva.Size = new Size(90, 27);
             btnSalva.TabIndex = 6;
             btnSalva.Text = "SALVA";
             btnSalva.UseVisualStyleBackColor = true;
@@ -89,33 +96,37 @@
             // cbDurata
             // 
             cbDurata.FormattingEnabled = true;
-            cbDurata.Location = new Point(173, 385);
+            cbDurata.Location = new Point(138, 308);
+            cbDurata.Margin = new Padding(2, 2, 2, 2);
             cbDurata.Name = "cbDurata";
-            cbDurata.Size = new Size(182, 33);
+            cbDurata.Size = new Size(146, 28);
             cbDurata.TabIndex = 7;
+            cbDurata.SelectedIndexChanged += cbDurata_SelectedIndexChanged;
             // 
             // lblColore
             // 
             lblColore.AutoSize = true;
-            lblColore.Location = new Point(489, 342);
+            lblColore.Location = new Point(391, 274);
+            lblColore.Margin = new Padding(2, 0, 2, 0);
             lblColore.Name = "lblColore";
-            lblColore.Size = new Size(68, 25);
+            lblColore.Size = new Size(56, 20);
             lblColore.TabIndex = 8;
             lblColore.Text = "Colore:";
             // 
             // cbColore
             // 
             cbColore.FormattingEnabled = true;
-            cbColore.Location = new Point(437, 385);
+            cbColore.Location = new Point(350, 308);
+            cbColore.Margin = new Padding(2, 2, 2, 2);
             cbColore.Name = "cbColore";
-            cbColore.Size = new Size(182, 33);
+            cbColore.Size = new Size(146, 28);
             cbColore.TabIndex = 9;
             // 
             // FormCreazioneImpegno
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 521);
+            ClientSize = new Size(640, 417);
             Controls.Add(cbColore);
             Controls.Add(lblColore);
             Controls.Add(cbDurata);
@@ -125,6 +136,7 @@
             Controls.Add(rtbDescrizione);
             Controls.Add(lblTitolo);
             Controls.Add(txtTitolo);
+            Margin = new Padding(2, 2, 2, 2);
             Name = "FormCreazioneImpegno";
             Text = "FormCreazioneImpegno";
             ResumeLayout(false);

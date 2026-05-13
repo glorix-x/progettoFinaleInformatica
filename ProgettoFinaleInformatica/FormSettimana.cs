@@ -15,6 +15,7 @@ namespace ProgettoFinaleInformatica {
         private FormCreazioneImpegno formCreazioneAttivo = null;
         private FormModificaImpegno formModificaAttivo = null;
         private GestoreImpegni gestore;
+        private DateTime giorno;
 
         public FormSettimana(DateTime start, GestoreImpegni gestore) {
             InitializeComponent();
@@ -150,6 +151,7 @@ namespace ProgettoFinaleInformatica {
             Impegno impegno = (Impegno)btn.Tag;
 
             FormModificaImpegno form = new FormModificaImpegno(impegno, gestore);
+
 
             if(formModificaAttivo != null) {
                 formModificaAttivo.Close();
