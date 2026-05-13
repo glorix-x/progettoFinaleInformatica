@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 namespace ProgettoFinaleInformatica {
-    public partial class FormModificaImpegno : BaseForm
+    public partial class FormModificaImpegno : Form
     {
         private Impegno impegno;
         private GestoreImpegni gestore;

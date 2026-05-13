@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace ProgettoFinaleInformatica {
     public partial class FormCreazioneImpegno : Form {
-        private static Color[] listaColori = { Color.OrangeRed, Color.LightBlue, Color.LightPink, Color.Yellow, Color.Green};
+        public static Color[] listaColori = { Color.OrangeRed, Color.LightBlue, Color.LightPink, Color.Yellow, Color.Green};
         private GestoreImpegni gestore;
         private DateTime giorno;
         private FormSettimana form;
