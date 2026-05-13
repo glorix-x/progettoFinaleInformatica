@@ -44,6 +44,7 @@ namespace ProgettoFinaleInformatica {
                     btn.Tag = null;
                     btn.Name = j.ToString() + " " + i.ToString();
                     btn.Click += AggiungiImpegno;
+                    btn.Font = new Font(new Font("Cambria", 20), FontStyle.Regular);
                     grigliaSettimana.Controls.Add(btn);
                 }
             }
@@ -76,7 +77,7 @@ namespace ProgettoFinaleInformatica {
         }
 
         private void SetStyleForOccupiedBtn(Button btn) {
-            btn.BackColor = ((Impegno)btn.Tag).Colore;
+            btn.BackColor = ColorTranslator.FromHtml(((Impegno)btn.Tag).ColoreHex);
         }
 
         public void SetImpegno(Impegno impegno) {

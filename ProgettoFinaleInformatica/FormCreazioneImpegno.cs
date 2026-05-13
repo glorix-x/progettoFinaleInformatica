@@ -48,12 +48,16 @@ namespace ProgettoFinaleInformatica {
             if(titolo.Trim() == "" || descrizione.Trim() == "") {
                 MessageBox.Show("Compilare tutti i campi");
             } else {
-                Impegno nuovoImpegno = new Impegno(titolo, descrizione, giorno, giorno, durata, true, colore);
+                Impegno nuovoImpegno = new Impegno(titolo, descrizione, giorno, giorno, durata, true, ColoreHex(colore));
                 gestore.AddImpegno(nuovoImpegno);
                 form.SetImpegno(nuovoImpegno);
                 form.Show();
                 this.Close();
             }
+        }
+
+        private string ColoreHex(Color colore) {
+            return $"#{colore.R:X2}{colore.G:X2}{colore.B:X2}";
         }
     }
 }
