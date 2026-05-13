@@ -2,7 +2,7 @@ using ClassLibraryCalendario;
 using System.Text.Json;
 
 namespace ProgettoFinaleInformatica {
-    public partial class FormCalendario : BaseForm {
+    public partial class FormCalendario : Form {
         private FormSettimana formAttivo = null;
         private GestoreImpegni gestore;
         public FormCalendario() {

@@ -4,11 +4,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Text;
 using System.Windows.Forms;
 
 namespace ProgettoFinaleInformatica {
-    public partial class FormSettimana : BaseForm {
+    public partial class FormSettimana : Form {
         private static string[] daysName = { "Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì", "Sabto", "Domenica" };
         private DateTime start;
         private FormCreazioneImpegno formCreazioneAttivo = null;
@@ -22,6 +23,7 @@ namespace ProgettoFinaleInformatica {
             this.gestore = gestore;
 
             int height = Screen.PrimaryScreen.Bounds.Height - grigliaSettimana.Location.Y - 250;
+            grigliaSettimana.Location = new Point(grigliaSettimana.Location.X, grigliaSettimana.Location.Y + 10);
 
             //Metto la grandezza della griglia in base a quella dello schermo
             //e faccio in modo che il numero di pixel sia divisibile per 24 per

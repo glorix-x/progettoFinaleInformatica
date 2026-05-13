@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace ProgettoFinaleInformatica
 {
-    public partial class FormOttimizzazione : BaseForm
+    public partial class FormOttimizzazione : Form
     {
         public FormOttimizzazione()
         {

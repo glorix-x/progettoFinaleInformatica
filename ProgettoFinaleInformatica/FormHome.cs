@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace ProgettoFinaleInformatica
 {
-    public partial class FormHome : BaseForm
+    public partial class FormHome : Form
     {
         public FormHome()
         {
