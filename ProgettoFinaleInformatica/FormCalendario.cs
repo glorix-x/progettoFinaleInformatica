@@ -13,6 +13,7 @@ namespace ProgettoFinaleInformatica {
             PrivateFontCollection fonts = new PrivateFontCollection();
             fonts.AddFontFile("Fonts/SupermercadoOne-Regular.ttf");
             this.font = new Font(fonts.Families[0], 11f);
+            lblScegliSettimana.Font = new Font(font.FontFamily, 30);
         }
 
         private void monthCalendar1_DateSelected(object sender, DateRangeEventArgs e) {
