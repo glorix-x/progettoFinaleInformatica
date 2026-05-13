@@ -1,13 +1,18 @@
 using ClassLibraryCalendario;
+using System.Drawing.Text;
 using System.Text.Json;
 
 namespace ProgettoFinaleInformatica {
     public partial class FormCalendario : Form {
         private FormSettimana formAttivo = null;
         private GestoreImpegni gestore;
+        private Font font;
         public FormCalendario() {
             InitializeComponent();
             gestore = new GestoreImpegni();
+            PrivateFontCollection fonts = new PrivateFontCollection();
+            fonts.AddFontFile("Fonts/SupermercadoOne-Regular.ttf");
+            this.font = new Font(fonts.Families[0], 11f);
         }
 
         private void monthCalendar1_DateSelected(object sender, DateRangeEventArgs e) {

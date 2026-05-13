@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Text;
 using System.Windows.Forms;
 
@@ -13,12 +14,17 @@ namespace ProgettoFinaleInformatica {
         private GestoreImpegni gestore;
         private DateTime giorno;
         private FormSettimana form;
+        private Font font;
 
         public FormCreazioneImpegno(DateTime giorno, GestoreImpegni gestore, FormSettimana form) {
             InitializeComponent();
             this.gestore = gestore;
             this.giorno = giorno;
             this.form = form;
+
+            PrivateFontCollection fonts = new PrivateFontCollection();
+            fonts.AddFontFile("Fonts/SupermercadoOne-Regular.ttf");
+            this.font = new Font(fonts.Families[0], 11f);
 
             int numOreMax = 0;
 
