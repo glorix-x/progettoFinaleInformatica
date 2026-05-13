@@ -30,6 +30,8 @@
             lblDurata = new Label();
             btnSalva = new Button();
             cbDurata = new ComboBox();
+            lblColore = new Label();
+            cbColore = new ComboBox();
             SuspendLayout();
             // 
             // txtTitolo
@@ -68,7 +70,7 @@
             // lblDurata
             // 
             lblDurata.AutoSize = true;
-            lblDurata.Location = new Point(337, 336);
+            lblDurata.Location = new Point(207, 342);
             lblDurata.Name = "lblDurata";
             lblDurata.Size = new Size(119, 25);
             lblDurata.TabIndex = 5;
@@ -87,16 +89,35 @@
             // cbDurata
             // 
             cbDurata.FormattingEnabled = true;
-            cbDurata.Location = new Point(303, 379);
+            cbDurata.Location = new Point(173, 385);
             cbDurata.Name = "cbDurata";
             cbDurata.Size = new Size(182, 33);
             cbDurata.TabIndex = 7;
+            // 
+            // lblColore
+            // 
+            lblColore.AutoSize = true;
+            lblColore.Location = new Point(489, 342);
+            lblColore.Name = "lblColore";
+            lblColore.Size = new Size(68, 25);
+            lblColore.TabIndex = 8;
+            lblColore.Text = "Colore:";
+            // 
+            // cbColore
+            // 
+            cbColore.FormattingEnabled = true;
+            cbColore.Location = new Point(437, 385);
+            cbColore.Name = "cbColore";
+            cbColore.Size = new Size(182, 33);
+            cbColore.TabIndex = 9;
             // 
             // FormCreazioneImpegno
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 521);
+            Controls.Add(cbColore);
+            Controls.Add(lblColore);
             Controls.Add(cbDurata);
             Controls.Add(btnSalva);
             Controls.Add(lblDurata);
@@ -119,5 +140,7 @@
         private Label lblDurata;
         private Button btnSalva;
         private ComboBox cbDurata;
+        private Label lblColore;
+        private ComboBox cbColore;
     }
 }
