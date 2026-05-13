@@ -16,12 +16,17 @@ namespace ProgettoFinaleInformatica {
         private FormModificaImpegno formModificaAttivo = null;
         private GestoreImpegni gestore;
         private DateTime giorno;
+        private Font font;
 
         public FormSettimana(DateTime start, GestoreImpegni gestore) {
             InitializeComponent();
             this.WindowState = FormWindowState.Maximized;
             this.start = start;
             this.gestore = gestore;
+
+            PrivateFontCollection fonts = new PrivateFontCollection();
+            fonts.AddFontFile("Fonts/SupermercadoOne-Regular.ttf");
+            this.font = new Font(fonts.Families[0], 11f);
 
             int height = Screen.PrimaryScreen.Bounds.Height - grigliaSettimana.Location.Y - 250;
             grigliaSettimana.Location = new Point(grigliaSettimana.Location.X, grigliaSettimana.Location.Y + 10);
@@ -43,6 +48,7 @@ namespace ProgettoFinaleInformatica {
                 Label lbl = new Label();
                 lbl.Text = (i.ToString().Length == 1 ? "0" : "") + i.ToString() + ":00";
                 lbl.Location = new Point(grigliaSettimana.Location.X - 70, grigliaSettimana.Location.Y + (grigliaSettimana.Height / 24 - lbl.Size.Height) / 2 + i * grigliaSettimana.Height / 24);
+                lbl.Font = new Font(font.FontFamily, 10);
                 Controls.Add(lbl);
             }
 
@@ -68,7 +74,7 @@ namespace ProgettoFinaleInformatica {
                 int cellWidth = grigliaSettimana.Size.Width / 7;
                 lbl.Text = strGiorni[i] + " " + (day.Day.ToString().Length == 1 ? "0" : "") + day.Day + "/" + (day.Month.ToString().Length == 1 ? "0" : "") + day.Month;
                 lbl.Location = new Point(grigliaSettimana.Location.X + (cellWidth - lbl.Size.Width) / 2 + cellWidth * i, lbl.Location.Y);
-                lbl.Font = new Font(this.Font.FontFamily, 20);
+                lbl.Font = new Font(this.font.FontFamily, 20);
                 day = day.AddDays(1);
             }
 
@@ -86,6 +92,7 @@ namespace ProgettoFinaleInformatica {
             btn.Margin = new Padding(0);
             btn.Dock = DockStyle.Fill;
             btn.FlatStyle = FlatStyle.Flat;
+            btn.Font = new Font(font.FontFamily, 15);
         }
 
         private void SetStyleForOccupiedBtn(Button btn) {
