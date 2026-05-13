@@ -9,6 +9,7 @@ using System.Windows.Forms;
 
 namespace ProgettoFinaleInformatica {
     public partial class FormCreazioneImpegno : Form {
+        private static Color[] listaColori = { Color.OrangeRed, Color.LightBlue, Color.LightPink, Color.Yellow, Color.Green};
         private GestoreImpegni gestore;
         private DateTime giorno;
         private FormSettimana form;
@@ -35,6 +36,7 @@ namespace ProgettoFinaleInformatica {
                 listaOre.Add(i);
             }
 
+            cbColore.DataSource = listaColori;
             cbDurata.DataSource = listaOre;
         }
 
@@ -42,10 +44,11 @@ namespace ProgettoFinaleInformatica {
             string titolo = txtTitolo.Text;
             string descrizione = rtbDescrizione.Text;
             int durata = Convert.ToInt32(cbDurata.Text);
+            Color colore = listaColori[cbColore.SelectedIndex];
             if(titolo.Trim() == "" || descrizione.Trim() == "") {
                 MessageBox.Show("Compilare tutti i campi");
             } else {
-                Impegno nuovoImpegno = new Impegno(titolo, descrizione, giorno, giorno, durata, true);
+                Impegno nuovoImpegno = new Impegno(titolo, descrizione, giorno, giorno, durata, true, colore);
                 gestore.AddImpegno(nuovoImpegno);
                 form.SetImpegno(nuovoImpegno);
                 form.Show();

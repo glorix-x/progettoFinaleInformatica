@@ -17,13 +17,24 @@ namespace ProgettoFinaleInformatica {
 
         public FormSettimana(DateTime start, GestoreImpegni gestore) {
             InitializeComponent();
+            this.WindowState = FormWindowState.Maximized;
             this.start = start;
             this.gestore = gestore;
+
+            int height = Screen.PrimaryScreen.Bounds.Height - grigliaSettimana.Location.Y - 250;
+
+            grigliaSettimana.Height = height - height % 24;
+            grigliaSettimana.Width = Screen.PrimaryScreen.Bounds.Width - grigliaSettimana.Location.X - 140;
+
+            foreach(RowStyle row in grigliaSettimana.RowStyles) {
+                row.SizeType = SizeType.Absolute;
+                row.Height = grigliaSettimana.Height / 24 - 1;
+            }
 
             for(int i = 0; i < 24; i++) {
                 Label lbl = new Label();
                 lbl.Text = (i.ToString().Length == 1 ? "0" : "") + i.ToString() + ":00";
-                lbl.Location = new Point(grigliaSettimana.Location.X - 70, grigliaSettimana.Location.Y + 2 + i * grigliaSettimana.Height / 24);
+                lbl.Location = new Point(grigliaSettimana.Location.X - 70, grigliaSettimana.Location.Y + (grigliaSettimana.Height / 24 - lbl.Size.Height) / 2 + i * grigliaSettimana.Height / 24);
                 Controls.Add(lbl);
             }
             for(int i = 0; i < 24; i++) {
@@ -36,12 +47,16 @@ namespace ProgettoFinaleInformatica {
                     grigliaSettimana.Controls.Add(btn);
                 }
             }
+
             DateTime day = start;
             List<string> strGiorni = new List<string>() { "Lun", "Mar", "Mer", "Gio", "Ven", "Sab", "Dom" };
             List<Label> labelGiorni = new List<Label>() { lblLunedi, lblMartedi, lblMercoledi, lblGiovedi, lblVenerdi, lblSabato, lblDomenica };
 
             for(int i = 0; i < 7; i++) {
-                labelGiorni[i].Text = strGiorni[i] + " " + (day.Day.ToString().Length == 1 ? "0" : "") + day.Day + "/" + (day.Month.ToString().Length == 1 ? "0" : "") + day.Month;
+                Label lbl = labelGiorni[i];
+                int cellWidth = grigliaSettimana.Size.Width / 7;
+                lbl.Text = strGiorni[i] + " " + (day.Day.ToString().Length == 1 ? "0" : "") + day.Day + "/" + (day.Month.ToString().Length == 1 ? "0" : "") + day.Month;
+                lbl.Location = new Point(grigliaSettimana.Location.X + (cellWidth - lbl.Size.Width) / 2 + cellWidth * i, lbl.Location.Y);
                 day = day.AddDays(1);
             }
 
@@ -61,17 +76,7 @@ namespace ProgettoFinaleInformatica {
         }
 
         private void SetStyleForOccupiedBtn(Button btn) {
-            Color normalColor = Color.FromArgb(120, 190, 230);
-            Color hoverColor = Color.FromArgb(130, 200, 240);
-
-            btn.BackColor = normalColor;
-
-            btn.MouseEnter += (s, e) => {
-                btn.BackColor = hoverColor;
-            };
-            btn.MouseLeave += (s, e) => {
-                btn.BackColor = normalColor;
-            };
+            btn.BackColor = ((Impegno)btn.Tag).Colore;
         }
 
         public void SetImpegno(Impegno impegno) {
