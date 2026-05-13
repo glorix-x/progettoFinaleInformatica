@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 namespace ProgettoFinaleInformatica {
-    public partial class FormCreazioneImpegno : Form {
+    public partial class FormCreazioneImpegno : BaseForm {
         private static Color[] listaColori = { Color.OrangeRed, Color.LightBlue, Color.LightPink, Color.Yellow, Color.Green};
         private GestoreImpegni gestore;
         private DateTime giorno;

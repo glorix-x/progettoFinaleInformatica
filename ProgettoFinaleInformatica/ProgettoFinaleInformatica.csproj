@@ -9,6 +9,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Fonts\SupermercadoOne-Regular.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Fonts\SupermercadoOne-Regular.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ClassLibraryCalendario\ClassLibraryCalendario.csproj" />
   </ItemGroup>
 

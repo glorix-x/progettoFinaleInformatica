@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 namespace ProgettoFinaleInformatica {
-    public partial class FormSettimana : Form {
+    public partial class FormSettimana : BaseForm {
         private static string[] daysName = { "Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì", "Sabto", "Domenica" };
         private DateTime start;
         private FormCreazioneImpegno formCreazioneAttivo = null;
