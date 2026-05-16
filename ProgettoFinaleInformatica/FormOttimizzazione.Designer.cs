@@ -174,6 +174,7 @@
             btnOttimizza.TabIndex = 13;
             btnOttimizza.Text = "Ottimizza!";
             btnOttimizza.UseVisualStyleBackColor = true;
+            btnOttimizza.Click += btnOttimizza_Click;
             // 
             // FormOttimizzazione
             // 

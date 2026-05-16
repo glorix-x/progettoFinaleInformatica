@@ -40,7 +40,7 @@ namespace ProgettoFinaleInformatica {
 
         private void btnOttimizzazione_Click(object sender, EventArgs e)
         {
-            FormOttimizzazione f = new FormOttimizzazione(gestore);
+            FormOttimizzazione f = new FormOttimizzazione(gestore,this);
             f.Show();
         }
     }

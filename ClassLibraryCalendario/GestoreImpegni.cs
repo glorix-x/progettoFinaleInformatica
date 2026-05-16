@@ -6,7 +6,6 @@ using System.Text.Json;
 namespace ClassLibraryCalendario {
     public class GestoreImpegni {
         List<Impegno> listaImpegni;
-
         public GestoreImpegni() {
             string testo = File.ReadAllText("impegni.json");
             listaImpegni = JsonSerializer.Deserialize<List<Impegno>>(testo);
@@ -56,6 +55,101 @@ namespace ClassLibraryCalendario {
 
         public void SaveData() {
             File.WriteAllText("impegni.json", JsonSerializer.Serialize(listaImpegni));
+        }
+        public void RimuoviImpegno(Impegno impegno)
+        {
+            listaImpegni.Remove(impegno);
+            this.SaveData();
+        }
+        /*  
+            parte da ORA
+            cerca il primo buco libero
+            mette gli impegni prima della deadline
+            evita sovrapposizioni
+            evita notte
+            evita weekend
+            dà priorità alle scadenze vicine
+        */
+        private bool SlotLibero(DateTime inizio, int durata)
+        {
+            DateTime fine = inizio.AddHours(durata);
+
+            foreach (Impegno i in listaImpegni)
+            {
+                DateTime start = i.DataFissata;
+                DateTime end = i.DataFissata.AddHours(i.DurataOre);
+
+                bool libero = inizio < end && fine > start;
+
+                if (libero)
+                    return false;
+            }
+
+            return true;
+        }
+        public void Ottimizza(List<Impegno> daOttimizzare)
+        {
+            // Ordino per deadline
+            daOttimizzare = daOttimizzare
+                .OrderBy(i => i.Deadline)
+                .ThenByDescending(i => i.DurataOre)
+                .ToList();
+
+            foreach (Impegno imp in daOttimizzare)
+            {
+                DateTime corrente = DateTime.Now;
+
+                bool trovato = false;
+
+                while (corrente < imp.Deadline)
+                {
+                    // Evita notte
+                    if (corrente.Hour < 8)
+                    {
+                        corrente = new DateTime(
+                            corrente.Year,
+                            corrente.Month,
+                            corrente.Day,
+                            8, 0, 0
+                        );
+                    }
+
+                    // Evita oltre le 22
+                    if (corrente.Hour + imp.DurataOre > 22)
+                    {
+                        corrente = corrente.Date.AddDays(1).AddHours(8);
+                        continue;
+                    }
+
+                    // Evita weekend
+                    if (corrente.DayOfWeek == DayOfWeek.Saturday ||
+                       corrente.DayOfWeek == DayOfWeek.Sunday)
+                    {
+                        corrente = corrente.Date.AddDays(1).AddHours(8);
+                        continue;
+                    }
+
+                    // Controllo slot
+                    if (SlotLibero(corrente, imp.DurataOre))
+                    {
+                        imp.DataFissata = corrente;
+
+                        listaImpegni.Add(imp);
+
+                        trovato = true;
+                        break;
+                    }
+
+                    corrente = corrente.AddHours(1);
+                }
+                AddImpegno(imp);
+
+                if (!trovato)
+                {
+                   
+                }
+                SaveData();
+            }
         }
     }
 }

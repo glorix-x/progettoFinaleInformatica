@@ -12,11 +12,13 @@ namespace ProgettoFinaleInformatica {
     {
         private Impegno impegno;
         private GestoreImpegni gestore;
-        public FormModificaImpegno(Impegno impegno, GestoreImpegni gestore)
+        private FormSettimana form;
+        public FormModificaImpegno(Impegno impegno, GestoreImpegni gestore, FormSettimana form)
         {
             InitializeComponent();
             this.impegno = impegno;
             this.gestore = gestore;
+            this.form = form; 
             ucModifica.GetData(impegno, gestore);
             DateTime giorno = impegno.DataFissata;
             int numOreMax = 0;
@@ -37,6 +39,13 @@ namespace ProgettoFinaleInformatica {
         private void btSalvaM_Click(object sender, EventArgs e)
         {
             ucModifica.ModificaImpegno(impegno);
+        }
+
+        private void btElliminaM_Click(object sender, EventArgs e)
+        {
+            gestore.RimuoviImpegno(impegno);
+            form.Aggiorna();
+            form.Show();
         }
     }
 }

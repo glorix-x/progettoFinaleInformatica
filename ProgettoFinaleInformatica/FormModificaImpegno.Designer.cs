@@ -45,8 +45,9 @@
             btElliminaM.Name = "btElliminaM";
             btElliminaM.Size = new Size(180, 46);
             btElliminaM.TabIndex = 4;
-            btElliminaM.Text = "Ellimina";
+            btElliminaM.Text = "Elimina";
             btElliminaM.UseVisualStyleBackColor = true;
+            btElliminaM.Click += btElliminaM_Click;
             // 
             // ucModifica
             // 

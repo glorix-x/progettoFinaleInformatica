@@ -184,7 +184,7 @@ namespace ProgettoFinaleInformatica {
             Button btn = (Button)sender;
             Impegno impegno = (Impegno)btn.Tag;
 
-            FormModificaImpegno form = new FormModificaImpegno(impegno, gestore);
+            FormModificaImpegno form = new FormModificaImpegno(impegno, gestore,this);
 
             if(formModificaAttivo != null) {
                 formModificaAttivo.Close();
