@@ -52,18 +52,6 @@ namespace ProgettoFinaleInformatica {
                 Controls.Add(lbl);
             }
 
-            //Aggiungo tutti i button nella griglia
-            for(int i = 0; i < 24; i++) {
-                for(int j = 0; j < 7; j++) {
-                    Button btn = new Button();
-                    SetStyleForBlankBtn(btn);
-                    btn.Tag = null;
-                    btn.Name = j.ToString() + " " + i.ToString();
-                    btn.Click += AggiungiImpegno;
-                    grigliaSettimana.Controls.Add(btn);
-                }
-            }
-
             DateTime day = start;
             List<string> strGiorni = new List<string>() { "Lun", "Mar", "Mer", "Gio", "Ven", "Sab", "Dom" };
             List<Label> labelGiorni = new List<Label>() { lblLunedi, lblMartedi, lblMercoledi, lblGiovedi, lblVenerdi, lblSabato, lblDomenica };
@@ -82,7 +70,32 @@ namespace ProgettoFinaleInformatica {
             Aggiorna();
         }
 
+        private void PreparaGriglia() {
+            //Aggiungo tutti i button nella griglia
+            for(int i = 0; i < 24; i++) {
+                for(int j = 0; j < 7; j++) {
+                    Button btn = new Button();
+                    SetStyleForBlankBtn(btn);
+                    btn.Tag = null;
+                    btn.Name = j.ToString() + " " + i.ToString();
+                    btn.Click += AggiungiImpegno;
+                    grigliaSettimana.Controls.Add(btn);
+                }
+            }
+        }
+
+        private void SvuotaGriglia() {
+            foreach(Control c in grigliaSettimana.Controls) {
+                c.Dispose();
+            }
+
+            grigliaSettimana.Controls.Clear();
+        }
+
         public void Aggiorna() {
+            this.Hide();
+            SvuotaGriglia();
+            PreparaGriglia();
             List<Impegno> listaImpegni = gestore.GetListaImpegniSettimana(start);
 
             foreach(Impegno impegno in listaImpegni) {
@@ -104,7 +117,6 @@ namespace ProgettoFinaleInformatica {
         }
 
         public void SetImpegno(Impegno impegno) {
-            this.Hide();
             DateTime data = impegno.DataFissata;
             string s = (((int)data.DayOfWeek - 1 + 7) % 7).ToString() + " " + data.Hour;
             Button btn = (Button)grigliaSettimana.Controls.Find(s, true)[0];
