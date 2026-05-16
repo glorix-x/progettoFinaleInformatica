@@ -48,7 +48,7 @@ namespace ProgettoFinaleInformatica
             pbHome.Height = 40;
             pbHome.Width = 600;
             pbHome.Left =(this.ClientSize.Width-pbHome.Width)/2;
-            pibble.Image = Image.FromFile("images/pibble.jpeg");
+            //pibble.Image = Image.FromFile("images/pibble.jpeg");
             pibble.SizeMode = PictureBoxSizeMode.StretchImage;
         }
         private void timer1_Tick_1(object sender, EventArgs e)

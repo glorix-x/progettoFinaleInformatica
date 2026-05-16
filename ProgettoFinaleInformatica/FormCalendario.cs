@@ -21,8 +21,7 @@ namespace ProgettoFinaleInformatica {
         private void monthCalendar1_DateSelected(object sender, DateRangeEventArgs e)
         {
             DateTime day = e.Start;
-            int differenza = (7 + day.DayOfWeek - DayOfWeek.Monday) % 7;
-            day = day.AddDays(-differenza).Date;
+            day = gestore.GetLunedi(day);
             if (formAttivo != null)
             {
                 formAttivo.Close();

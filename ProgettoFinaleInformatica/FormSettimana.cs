@@ -79,6 +79,10 @@ namespace ProgettoFinaleInformatica {
             }
 
             //Prendo tutti gli impegni della settimana e li inserisco
+            Aggiorna();
+        }
+
+        public void Aggiorna() {
             List<Impegno> listaImpegni = gestore.GetListaImpegniSettimana(start);
 
             foreach(Impegno impegno in listaImpegni) {
@@ -102,11 +106,13 @@ namespace ProgettoFinaleInformatica {
         public void SetImpegno(Impegno impegno) {
             this.Hide();
             DateTime data = impegno.DataFissata;
-            Button btn = (Button)grigliaSettimana.Controls.Find(((int)data.DayOfWeek - 1).ToString() + " " + data.Hour, true)[0];
+            string s = (((int)data.DayOfWeek - 1 + 7) % 7).ToString() + " " + data.Hour;
+            Button btn = (Button)grigliaSettimana.Controls.Find(s, true)[0];
             
             //Rimuovo tutti i button che vanno rimossi dopo quello corrente
             for(int i = 1; i < impegno.DurataOre; i++) {
-                grigliaSettimana.Controls.Remove((Button)grigliaSettimana.Controls.Find(((int)data.DayOfWeek - 1).ToString() + " " + (data.Hour + i), true)[0]);
+                s = (((int)data.DayOfWeek - 1 + 7) % 7).ToString() + " " + (data.Hour + i);
+                grigliaSettimana.Controls.Remove((Button)grigliaSettimana.Controls.Find(s, true)[0]);
             }
             //Allargo verticalmente il button
             grigliaSettimana.SetRowSpan(btn, impegno.DurataOre);

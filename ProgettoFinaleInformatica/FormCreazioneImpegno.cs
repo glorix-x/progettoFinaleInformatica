@@ -68,23 +68,30 @@ namespace ProgettoFinaleInformatica {
             }
             else
             {
-                //Creo l'impegno e lo aggiungo al gestore e alla griglia
-                Impegno nuovoImpegno = new Impegno(titolo, descrizione, giorno, giorno, durata, true, ColoreHex(colore));
-                gestore.AddImpegno(nuovoImpegno);
-                form.SetImpegno(nuovoImpegno);
-                form.Show();
-                this.Close();
+                bool errore = false;
+                int ripetereOgni = 0;
+                if(cbRipetere.Checked) {
+                    try {
+                        ripetereOgni = Convert.ToInt32(txtGiorniDaRipetere.Text.Trim());
+                    } catch(Exception ex) {
+                        MessageBox.Show("Inserire un numero valido come giorni da ripetere");
+                        errore = true;
+                    }
+                }
+                if(!errore) {
+                    //Creo l'impegno e lo aggiungo al gestore e alla griglia
+                    Impegno nuovoImpegno = new Impegno(titolo, descrizione, giorno, giorno, durata, true, ripetereOgni, ColoreHex(colore));
+                    gestore.AddImpegno(nuovoImpegno);
+                    form.Aggiorna();
+                    form.Show();
+                    this.Close();
+                }
             }
         }
 
         private string ColoreHex(Color colore)
         {
             return $"#{colore.R:X2}{colore.G:X2}{colore.B:X2}";
-        }
-
-        private void cbDurata_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

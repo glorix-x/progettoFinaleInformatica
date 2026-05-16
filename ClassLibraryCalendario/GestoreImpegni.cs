@@ -19,18 +19,35 @@ namespace ClassLibraryCalendario {
                 if(diff >= 0 && diff <= 6) {
                     lista.Add(impegno);
                 }
+                if(impegno.RipetutoOgni != 0) {
+                    Impegno i = impegno.Clone();
+                    while((i.DataFissata.Date - lunedi.Date).Days < 6) {
+                        i = i.Clone();
+                        i.DataFissata = i.DataFissata.AddDays(impegno.RipetutoOgni);
+                        diff = (i.DataFissata.Date - lunedi.Date).Days;
+                        if(diff >= 0 && diff <= 6) {
+                            lista.Add(i);
+                        }
+                    }
+                }
             }
             return lista;
         }
 
         public Impegno GetNextImpegno(DateTime ora) {
             Impegno next = null;
+            List<Impegno> listaImpegni = GetListaImpegniSettimana(GetLunedi(ora));
             foreach(Impegno i in listaImpegni) {
                 if(i.DataFissata.CompareTo(ora) > 0 && (next == null || i.DataFissata.CompareTo(next.DataFissata) < 0)) {
                     next = i;
                 }
             }
             return next;
+        }
+
+        public DateTime GetLunedi(DateTime day) {
+            int differenza = (7 + day.DayOfWeek - DayOfWeek.Monday) % 7;
+            return day.AddDays(-differenza).Date;
         }
 
         public void AddImpegno(Impegno impegno) {
