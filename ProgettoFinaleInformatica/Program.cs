@@ -12,7 +12,8 @@ namespace ProgettoFinaleInformatica {
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             FormCalendario form = new FormCalendario();
-            Application.Run(form);
+            FormHome f = new FormHome(form);
+            Application.Run(f);
             form.SaveData();
         }
     }
