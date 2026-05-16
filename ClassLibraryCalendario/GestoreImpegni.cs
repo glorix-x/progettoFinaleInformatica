@@ -17,6 +17,10 @@ namespace ClassLibraryCalendario {
             foreach(Impegno impegno in listaImpegni) {
                 int diff = (impegno.DataFissata.Date - lunedi.Date).Days;
                 if(diff >= 0 && diff <= 6) {
+                    Impegno sovrapposizione = lista.FirstOrDefault(i => SonoSovrapposti(i, impegno));
+                    if(sovrapposizione != null) {
+                        lista.Remove(sovrapposizione);
+                    }
                     lista.Add(impegno);
                 }
                 if(impegno.RipetutoOgni != 0) {
@@ -26,12 +30,23 @@ namespace ClassLibraryCalendario {
                         i.DataFissata = i.DataFissata.AddDays(impegno.RipetutoOgni);
                         diff = (i.DataFissata.Date - lunedi.Date).Days;
                         if(diff >= 0 && diff <= 6) {
-                            lista.Add(i);
+                            Impegno sovrapposizione = lista.FirstOrDefault(impegno => SonoSovrapposti(i, impegno));
+                            if(sovrapposizione == null) {
+                                lista.Add(i);
+                            }
                         }
                     }
                 }
             }
             return lista;
+        }
+
+        public bool SonoSovrapposti(Impegno i1, Impegno i2) {
+            DateTime inizio1 = i1.DataFissata;
+            DateTime fine1 = i1.DataFissata.AddHours(i1.DurataOre);
+            DateTime inizio2 = i2.DataFissata;
+            DateTime fine2 = i2.DataFissata.AddHours(i2.DurataOre);
+            return (inizio1.CompareTo(inizio2) >= 0 && inizio1.CompareTo(fine2) < 0) || (inizio2.CompareTo(inizio1) >= 0 && inizio2.CompareTo(fine1) < 0);
         }
 
         public Impegno GetNextImpegno(DateTime ora) {
