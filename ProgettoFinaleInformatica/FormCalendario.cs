@@ -15,18 +15,21 @@ namespace ProgettoFinaleInformatica {
             PrivateFontCollection fonts = new PrivateFontCollection();
             fonts.AddFontFile("Fonts/SupermercadoOne-Regular.ttf");
             this.font = new Font(fonts.Families[0], 11f);
-            lblScegliSettimana.Font = new Font(font.FontFamily, 30);
+            lblScegliSettimana.Font = new Font(font.FontFamily, 30);            
         }
 
         private void monthCalendar1_DateSelected(object sender, DateRangeEventArgs e)
         {
             DateTime day = e.Start;
             day = gestore.GetLunedi(day);
-            if (formAttivo != null)
-            {
+            ShowWeek(day);
+        }
+
+        public void ShowWeek(DateTime day) {
+            if(formAttivo != null) {
                 formAttivo.Close();
             }
-            formAttivo = new FormSettimana(day, gestore);
+            formAttivo = new FormSettimana(day, gestore, this);
             formAttivo.Show();
         }
 

@@ -14,19 +14,28 @@ namespace ProgettoFinaleInformatica {
         private DateTime start;
         private FormCreazioneImpegno formCreazioneAttivo = null;
         private FormModificaImpegno formModificaAttivo = null;
+        private FormCalendario formCalendario;
         private GestoreImpegni gestore;
-        private DateTime giorno;
         private Font font;
 
-        public FormSettimana(DateTime start, GestoreImpegni gestore) {
+        public FormSettimana(DateTime start, GestoreImpegni gestore, FormCalendario formCalendario) {
             InitializeComponent();
             this.WindowState = FormWindowState.Maximized;
             this.start = start;
             this.gestore = gestore;
+            this.formCalendario = formCalendario;
 
             PrivateFontCollection fonts = new PrivateFontCollection();
             fonts.AddFontFile("Fonts/SupermercadoOne-Regular.ttf");
             this.font = new Font(fonts.Families[0], 11f);
+
+            btnPreviousWeek.Font = new Font(font.FontFamily, 10);
+            btnNextWeek.Font = new Font(font.FontFamily, 10);
+
+            int distanzaDaiBordi = 20;
+
+            btnPreviousWeek.Location = new Point(distanzaDaiBordi, Screen.PrimaryScreen.Bounds.Height / 2 - btnPreviousWeek.Height);
+            btnNextWeek.Location = new Point(Screen.PrimaryScreen.Bounds.Width - distanzaDaiBordi - btnNextWeek.Width, Screen.PrimaryScreen.Bounds.Height / 2 - btnNextWeek.Height);
 
             int height = Screen.PrimaryScreen.Bounds.Height - grigliaSettimana.Location.Y - 250;
             grigliaSettimana.Location = new Point(grigliaSettimana.Location.X, grigliaSettimana.Location.Y + 10);
@@ -120,7 +129,7 @@ namespace ProgettoFinaleInformatica {
             DateTime data = impegno.DataFissata;
             string s = (((int)data.DayOfWeek - 1 + 7) % 7).ToString() + " " + data.Hour;
             Button btn = (Button)grigliaSettimana.Controls.Find(s, true)[0];
-            
+
             //Rimuovo tutti i button che vanno rimossi dopo quello corrente
             for(int i = 1; i < impegno.DurataOre; i++) {
                 s = (((int)data.DayOfWeek - 1 + 7) % 7).ToString() + " " + (data.Hour + i);
@@ -143,7 +152,7 @@ namespace ProgettoFinaleInformatica {
             int numGiorno = 0;
             int numOra = 0;
             bool isOra = false;
-            
+
             foreach(char c in btn.Name) {
                 if(c == ' ') {
                     isOra = true;
@@ -177,12 +186,19 @@ namespace ProgettoFinaleInformatica {
 
             FormModificaImpegno form = new FormModificaImpegno(impegno, gestore);
 
-
             if(formModificaAttivo != null) {
                 formModificaAttivo.Close();
             }
             formModificaAttivo = form;
             formModificaAttivo.Show();
+        }
+
+        private void btnPreviousWeek_Click(object sender, EventArgs e) {
+            formCalendario.ShowWeek(start.AddDays(-7));
+        }
+
+        private void btnNextWeek_Click(object sender, EventArgs e) {
+            formCalendario.ShowWeek(start.AddDays(7));
         }
     }
 }

@@ -31,6 +31,8 @@
             lblVenerdi = new Label();
             lblSabato = new Label();
             lblDomenica = new Label();
+            btnPreviousWeek = new Button();
+            btnNextWeek = new Button();
             SuspendLayout();
             // 
             // grigliaSettimana
@@ -44,7 +46,7 @@
             grigliaSettimana.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 14.2857151F));
             grigliaSettimana.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 14.2857151F));
             grigliaSettimana.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 14.2857189F));
-            grigliaSettimana.Location = new Point(112, 44);
+            grigliaSettimana.Location = new Point(148, 43);
             grigliaSettimana.Margin = new Padding(2);
             grigliaSettimana.Name = "grigliaSettimana";
             grigliaSettimana.RowCount = 24;
@@ -152,11 +154,33 @@
             lblDomenica.TabIndex = 7;
             lblDomenica.Text = "         ";
             // 
+            // btnPreviousWeek
+            // 
+            btnPreviousWeek.Location = new Point(12, 362);
+            btnPreviousWeek.Name = "btnPreviousWeek";
+            btnPreviousWeek.Size = new Size(36, 34);
+            btnPreviousWeek.TabIndex = 8;
+            btnPreviousWeek.Text = "<";
+            btnPreviousWeek.UseVisualStyleBackColor = true;
+            btnPreviousWeek.Click += btnPreviousWeek_Click;
+            // 
+            // btnNextWeek
+            // 
+            btnNextWeek.Location = new Point(1524, 380);
+            btnNextWeek.Name = "btnNextWeek";
+            btnNextWeek.Size = new Size(36, 34);
+            btnNextWeek.TabIndex = 9;
+            btnNextWeek.Text = ">";
+            btnNextWeek.UseVisualStyleBackColor = true;
+            btnNextWeek.Click += btnNextWeek_Click;
+            // 
             // FormSettimana
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1572, 912);
+            Controls.Add(btnNextWeek);
+            Controls.Add(btnPreviousWeek);
             Controls.Add(lblDomenica);
             Controls.Add(lblSabato);
             Controls.Add(lblVenerdi);
@@ -182,5 +206,7 @@
         private Label lblVenerdi;
         private Label lblSabato;
         private Label lblDomenica;
+        private Button btnPreviousWeek;
+        private Button btnNextWeek;
     }
 }
