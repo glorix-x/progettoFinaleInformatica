@@ -70,8 +70,8 @@ namespace ProgettoFinaleInformatica {
                 Label lbl = labelGiorni[i];
                 int cellWidth = grigliaSettimana.Size.Width / 7;
                 lbl.Text = strGiorni[i] + " " + (day.Day.ToString().Length == 1 ? "0" : "") + day.Day + "/" + (day.Month.ToString().Length == 1 ? "0" : "") + day.Month;
-                lbl.Location = new Point(grigliaSettimana.Location.X + (cellWidth - lbl.Size.Width) / 2 + cellWidth * i, lbl.Location.Y);
                 lbl.Font = new Font(this.font.FontFamily, 20);
+                lbl.Location = new Point(grigliaSettimana.Location.X + (cellWidth - lbl.Size.Width) / 2 + cellWidth * i, grigliaSettimana.Location.Y - lbl.Height);
                 day = day.AddDays(1);
             }
 
