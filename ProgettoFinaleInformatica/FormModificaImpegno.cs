@@ -38,13 +38,16 @@ namespace ProgettoFinaleInformatica {
 
         private void btSalvaM_Click(object sender, EventArgs e)
         {
-            ucModifica.ModificaImpegno(impegno);
+            ucModifica.ModificaImpegno(impegno); 
+            gestore.SaveData();                  
+            form.Aggiorna();                   
+            form.Show();                      
             this.Close();
         }
 
         private void btElliminaM_Click(object sender, EventArgs e)
         {
-            gestore.RimuoviImpegno(impegno);
+            gestore.RimuoviImpegno(impegno.ImpegnoOrigine);
             form.Aggiorna();
             form.Show();
             this.Close();

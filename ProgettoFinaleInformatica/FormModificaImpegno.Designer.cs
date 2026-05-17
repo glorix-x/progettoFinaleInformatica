@@ -51,9 +51,9 @@
             // 
             // ucModifica
             // 
-            ucModifica.Location = new Point(137, -4);
+            ucModifica.Location = new Point(56, -4);
             ucModifica.Name = "ucModifica";
-            ucModifica.Size = new Size(463, 366);
+            ucModifica.Size = new Size(618, 366);
             ucModifica.TabIndex = 5;
             // 
             // FormModificaImpegno
