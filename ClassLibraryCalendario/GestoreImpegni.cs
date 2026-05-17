@@ -104,9 +104,8 @@ namespace ClassLibraryCalendario {
         public void RimuoviImpegno(Impegno impegno)
         {
             listaImpegni.Remove(impegno);
-            this.SaveData();
         }
-        /*  
+        /*
             parte da ORA
             cerca il primo buco libero
             mette gli impegni prima della deadline

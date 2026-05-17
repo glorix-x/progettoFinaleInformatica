@@ -39,6 +39,7 @@ namespace ProgettoFinaleInformatica {
         private void btSalvaM_Click(object sender, EventArgs e)
         {
             ucModifica.ModificaImpegno(impegno);
+            this.Close();
         }
 
         private void btElliminaM_Click(object sender, EventArgs e)
@@ -46,6 +47,7 @@ namespace ProgettoFinaleInformatica {
             gestore.RimuoviImpegno(impegno);
             form.Aggiorna();
             form.Show();
+            this.Close();
         }
     }
 }
