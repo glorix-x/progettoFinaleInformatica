@@ -56,7 +56,9 @@ namespace ProgettoFinaleInformatica
         private void btnOttimizza_Click(object sender, EventArgs e)
         {
             BindingList<Impegno> binding = new BindingList<Impegno>(g.Ottimizza(impegniDaOttimizzare.ToList()));
-            dgvImpegni.DataSource = binding;
+            if (binding.Count == 0) this.Close();
+            else dgvImpegni.DataSource = binding;
+   
             MessageBox.Show("Ottimizzazione completata!");
             
         }

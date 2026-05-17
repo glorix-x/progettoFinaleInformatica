@@ -190,7 +190,6 @@ namespace ClassLibraryCalendario {
 
                 if (trovato)
                 {
-                    trovato = false;
                     daRimuovere.Add(imp);
                 }
             }
