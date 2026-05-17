@@ -33,7 +33,8 @@ namespace ProgettoFinaleInformatica
                 return;
 
             }
-            Impegno i = new Impegno(tbNome.Text, rtbDescrizione.Text, dtpDeadline.Value, DateTime.Now, Convert.ToInt32(cbDurata.Text), false, 0, ColoreHex(FormCreazioneImpegno.listaColori[cbColore.SelectedIndex]));
+            Impegno i = new Impegno(tbNome.Text, rtbDescrizione.Text, dtpDeadline.Value, DateTime.Now, Convert.ToInt32(cbDurata.Text), false, 0, null, ColoreHex(FormCreazioneImpegno.listaColori[cbColore.SelectedIndex]));
+            i.ImpegnoOrigine = i;
             impegniDaOttimizzare.Add(i);
 
         }
@@ -59,7 +60,6 @@ namespace ProgettoFinaleInformatica
 
             MessageBox.Show("Ottimizzazione completata!");
             this.Hide();
-            f.Refresh();
             
         }
     }

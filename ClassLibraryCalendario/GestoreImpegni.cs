@@ -39,6 +39,7 @@ namespace ClassLibraryCalendario {
                         i = impegno.Clone();
                         i.DataFissata = i.DataFissata.AddDays(impegno.RipetutoOgni * c);
                         diff = (i.DataFissata.Date - lunedi.Date).Days;
+                        i.ImpegnoOrigine = impegno;
                         if(diff >= 0 && diff <= 6) {
                             Impegno sovrapposizione = lista.FirstOrDefault(impegno => SonoSovrapposti(i, impegno));
                             if(sovrapposizione == null || OreSovrapposte(i, sovrapposizione) < i.DurataOre) {
@@ -192,7 +193,6 @@ namespace ClassLibraryCalendario {
                 {
                    
                 }
-                SaveData();
             }
         }
     }
