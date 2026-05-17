@@ -36,6 +36,8 @@
             cbColore = new ComboBox();
             cbDurata = new ComboBox();
             lblDurata = new Label();
+            cbRipeti = new CheckBox();
+            tbRipeti = new TextBox();
             SuspendLayout();
             // 
             // label2
@@ -107,10 +109,29 @@
             lblDurata.TabIndex = 18;
             lblDurata.Text = "Durata in ore:";
             // 
+            // cbRipeti
+            // 
+            cbRipeti.AutoSize = true;
+            cbRipeti.Location = new Point(476, 87);
+            cbRipeti.Name = "cbRipeti";
+            cbRipeti.Size = new Size(70, 24);
+            cbRipeti.TabIndex = 20;
+            cbRipeti.Text = "Ripeti";
+            cbRipeti.UseVisualStyleBackColor = true;
+            // 
+            // tbRipeti
+            // 
+            tbRipeti.Location = new Point(451, 117);
+            tbRipeti.Name = "tbRipeti";
+            tbRipeti.Size = new Size(125, 27);
+            tbRipeti.TabIndex = 21;
+            // 
             // UserControlModifica
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(tbRipeti);
+            Controls.Add(cbRipeti);
             Controls.Add(cbDurata);
             Controls.Add(lblDurata);
             Controls.Add(cbColore);
@@ -120,7 +141,7 @@
             Controls.Add(rtbDescrizioneM);
             Controls.Add(tbTitoloM);
             Name = "UserControlModifica";
-            Size = new Size(483, 377);
+            Size = new Size(644, 377);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -134,5 +155,7 @@
         private ComboBox cbColore;
         private ComboBox cbDurata;
         private Label lblDurata;
+        private CheckBox cbRipeti;
+        private TextBox tbRipeti;
     }
 }

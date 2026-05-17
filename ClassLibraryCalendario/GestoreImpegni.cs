@@ -131,14 +131,14 @@ namespace ClassLibraryCalendario {
 
             return true;
         }
-        public void Ottimizza(List<Impegno> daOttimizzare)
+        public List<Impegno> Ottimizza(List<Impegno> daOttimizzare)
         {
             // Ordino per deadline
             daOttimizzare = daOttimizzare
                 .OrderBy(i => i.Deadline)
                 .ThenByDescending(i => i.DurataOre)
                 .ToList();
-
+            List<Impegno> daRimuovere = new List<Impegno>();
             foreach (Impegno imp in daOttimizzare)
             {
                 DateTime corrente = DateTime.Now;
@@ -188,11 +188,17 @@ namespace ClassLibraryCalendario {
                 }
                 AddImpegno(imp);
 
-                if (!trovato)
+                if (trovato)
                 {
-                   
+                    trovato = false;
+                    daRimuovere.Add(imp);
                 }
             }
+            foreach(Impegno i in daRimuovere)
+            {
+                daOttimizzare.Remove(i);
+            }
+            return daOttimizzare;
         }
     }
 }
