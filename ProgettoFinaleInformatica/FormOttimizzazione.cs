@@ -59,7 +59,6 @@ namespace ProgettoFinaleInformatica
 
             MessageBox.Show("Ottimizzazione completata!");
             this.Hide();
-            f.Refresh();
             
         }
     }

@@ -192,7 +192,6 @@ namespace ClassLibraryCalendario {
                 {
                    
                 }
-                SaveData();
             }
         }
     }
