@@ -44,7 +44,7 @@ namespace ProgettoFinaleInformatica {
 
         private void btElliminaM_Click(object sender, EventArgs e)
         {
-            gestore.RimuoviImpegno(impegno);
+            gestore.RimuoviImpegno(impegno.ImpegnoOrigine);
             form.Aggiorna();
             form.Show();
             this.Close();
