@@ -13,7 +13,7 @@ namespace ProgettoFinaleInformatica
     {
         private GestoreImpegni g;
         private FormCalendario f;
-        private BindingList<Impegno> impegniDaOttimizzare = new BindingList<Impegno>();
+        public BindingList<Impegno> impegniDaOttimizzare = new BindingList<Impegno>();
         public FormOttimizzazione(GestoreImpegni g, FormCalendario f)
         {
             InitializeComponent();
@@ -55,10 +55,9 @@ namespace ProgettoFinaleInformatica
 
         private void btnOttimizza_Click(object sender, EventArgs e)
         {
-            g.Ottimizza(impegniDaOttimizzare.ToList());
-
+            BindingList<Impegno> binding = new BindingList<Impegno>(g.Ottimizza(impegniDaOttimizzare.ToList()));
+            dgvImpegni.DataSource = binding;
             MessageBox.Show("Ottimizzazione completata!");
-            this.Hide();
             
         }
     }
