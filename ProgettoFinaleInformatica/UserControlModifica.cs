@@ -74,24 +74,28 @@ namespace ProgettoFinaleInformatica
             return $"#{colore.R:X2}{colore.G:X2}{colore.B:X2}";
         }
 
-        public Impegno ModificaImpegno(Impegno i)
+        public void ModificaImpegno(Impegno i)
         {
-            i.Titolo = tbTitoloM.Text;
-            i.Descrizione = rtbDescrizioneM.Text;
-            i.DurataOre = (int)cbDurata.SelectedValue;
-            i.ColoreHex = ColoreHex(listaColori[cbColore.SelectedIndex]);
+            Impegno impegno = null;
+            if(i is ImpegnoRicorrente) {
+                impegno = ((ImpegnoRicorrente)i).ImpegnoOrigine;
+            } else {
+                impegno = i;
+            }
 
+            impegno.Titolo = tbTitoloM.Text;
+            impegno.Descrizione = rtbDescrizioneM.Text;
+            impegno.DurataOre = (int)cbDurata.SelectedValue;
+            impegno.ColoreHex = ColoreHex(listaColori[cbColore.SelectedIndex]);
 
             if (cbRipeti.Checked && int.TryParse(tbRipeti.Text, out int giorni) && giorni > 0)
             {
-                i.RipetutoOgni = giorni;
+                impegno.RipetutoOgni = giorni;
             }
             else
             {
-                i.RipetutoOgni = 0; 
+                impegno.RipetutoOgni = 0; 
             }
-
-            return i;
         }
     }
 }

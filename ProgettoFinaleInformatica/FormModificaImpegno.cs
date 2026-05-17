@@ -39,7 +39,6 @@ namespace ProgettoFinaleInformatica {
         private void btSalvaM_Click(object sender, EventArgs e)
         {
             ucModifica.ModificaImpegno(impegno); 
-            gestore.SaveData();                  
             form.Aggiorna();                   
             form.Show();                      
             this.Close();

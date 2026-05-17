@@ -10,6 +10,6 @@ namespace ClassLibraryCalendario {
             this.impegnoOrigine = impegnoOrigine;
         }
 
-        public Impegno ImpegnoOrigine { get => ImpegnoOrigine; set => ImpegnoOrigine = value; }
+        public Impegno ImpegnoOrigine { get => impegnoOrigine; set => impegnoOrigine = value; }
     }
 }
