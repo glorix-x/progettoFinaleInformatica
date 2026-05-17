@@ -44,7 +44,11 @@ namespace ProgettoFinaleInformatica {
 
         private void btElliminaM_Click(object sender, EventArgs e)
         {
-            gestore.RimuoviImpegno(impegno.ImpegnoOrigine);
+            if(impegno is ImpegnoRicorrente) {
+                gestore.RimuoviImpegno(((ImpegnoRicorrente)impegno).ImpegnoOrigine);
+            } else {
+                gestore.RimuoviImpegno(impegno);
+            }
             form.Aggiorna();
             form.Show();
             this.Close();

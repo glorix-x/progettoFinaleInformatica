@@ -103,10 +103,13 @@ namespace ProgettoFinaleInformatica {
 
         public void Aggiorna() {
             this.Hide();
+            //Azzero la griglia riempiendola di soli bottoni vuoti
             SvuotaGriglia();
             PreparaGriglia();
+            //Richiedo gli impegni della settimana corrente
             List<Impegno> listaImpegni = gestore.GetListaImpegniSettimana(start);
 
+            //Li imposto uno ad uno
             foreach(Impegno impegno in listaImpegni) {
                 SetImpegno(impegno);
             }

@@ -9,10 +9,9 @@ namespace ClassLibraryCalendario {
         private int durataOre;
         private bool fisso;
         private int ripetutoOgni;
-        private Impegno impegnoOrigine;
         private string coloreHex;
 
-        public Impegno(string titolo, string descrizione, DateTime deadline, DateTime dataFissata, int durataOre, bool fisso, int ripetutoOgni, Impegno impegnoOrigine, string coloreHex) {
+        public Impegno(string titolo, string descrizione, DateTime deadline, DateTime dataFissata, int durataOre, bool fisso, int ripetutoOgni, string coloreHex) {
             this.titolo = titolo;
             this.descrizione = descrizione;
             this.deadline = deadline;
@@ -20,7 +19,6 @@ namespace ClassLibraryCalendario {
             this.durataOre = durataOre;
             this.fisso = fisso;
             this.ripetutoOgni = ripetutoOgni;
-            this.impegnoOrigine = impegnoOrigine;
             this.coloreHex = coloreHex;
         }
 
@@ -31,11 +29,10 @@ namespace ClassLibraryCalendario {
         public int DurataOre { get => durataOre; set => durataOre = value; }
         public bool Fisso { get => fisso; set => fisso = value; }
         public int RipetutoOgni { get => ripetutoOgni; set => ripetutoOgni = value; }
-        public Impegno ImpegnoOrigine { get => impegnoOrigine; set => impegnoOrigine = value; }
         public string ColoreHex { get => coloreHex; set => coloreHex = value; }
 
-        public Impegno Clone() {
-            return new Impegno(this.Titolo, this.Descrizione, this.Deadline, this.DataFissata, this.DurataOre, this.Fisso, this.RipetutoOgni, this.impegnoOrigine, this.ColoreHex);
+        public ImpegnoRicorrente CreateImpegnoRicorrente() {
+            return new ImpegnoRicorrente(this.Titolo, this.Descrizione, this.Deadline, this.DataFissata, this.DurataOre, this.Fisso, this.RipetutoOgni, this.ColoreHex, this);
         }
 
         public override string ToString() {

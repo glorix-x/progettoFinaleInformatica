@@ -33,17 +33,16 @@ namespace ClassLibraryCalendario {
                     lista.Add(impegno);
                 }
                 if(impegno.RipetutoOgni != 0) {
-                    Impegno i = impegno.Clone();
+                    ImpegnoRicorrente i = impegno.CreateImpegnoRicorrente();
                     int c = 1;
                     while((i.DataFissata.Date - lunedi.Date).Days < 6) {
-                        i = impegno.Clone();
+                        i = impegno.CreateImpegnoRicorrente();
                         i.DataFissata = i.DataFissata.AddDays(impegno.RipetutoOgni * c);
                         diff = (i.DataFissata.Date - lunedi.Date).Days;
-                        i.ImpegnoOrigine = impegno;
                         if(diff >= 0 && diff <= 6) {
-                            Impegno sovrapposizione = lista.FirstOrDefault(impegno => SonoSovrapposti(i, impegno));
-                            if(sovrapposizione == null || OreSovrapposte(i, sovrapposizione) < i.DurataOre) {
-                                if(sovrapposizione != null) {
+                            List<Impegno> sovrapposizioni = lista.Where(impegno => SonoSovrapposti(i, impegno)).ToList();
+                            foreach(Impegno sovrapposizione in sovrapposizioni) {
+                                if(OreSovrapposte(i, sovrapposizione) < i.DurataOre) {
                                     int ore = OreSovrapposte(i, sovrapposizione);
                                     if(i.DataFissata.CompareTo(sovrapposizione.DataFissata) >= 0) {
                                         i.DataFissata = i.DataFissata.AddHours(ore);
@@ -52,8 +51,8 @@ namespace ClassLibraryCalendario {
                                         i.DurataOre -= ore;
                                     }
                                 }
-                                lista.Add(i);
                             }
+                            lista.Add(i);
                         }
                         c++;
                         

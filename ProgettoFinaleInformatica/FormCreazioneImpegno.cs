@@ -80,8 +80,7 @@ namespace ProgettoFinaleInformatica {
                 }
                 if(!errore) {
                     //Creo l'impegno e lo aggiungo al gestore e alla griglia
-                    Impegno nuovoImpegno = new Impegno(titolo, descrizione, giorno, giorno, durata, true, ripetereOgni, null, ColoreHex(colore));
-                    nuovoImpegno.ImpegnoOrigine = nuovoImpegno;
+                    Impegno nuovoImpegno = new Impegno(titolo, descrizione, giorno, giorno, durata, true, ripetereOgni, ColoreHex(colore));
                     gestore.AddImpegno(nuovoImpegno);
                     form.Aggiorna();
                     form.Show();
