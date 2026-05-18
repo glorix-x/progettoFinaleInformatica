@@ -107,7 +107,7 @@ namespace ProgettoFinaleInformatica {
             SvuotaGriglia();
             PreparaGriglia();
             //Richiedo gli impegni della settimana corrente
-            List<Impegno> listaImpegni = gestore.GetListaImpegniSettimana(start);
+            List<Impegno> listaImpegni = gestore.GetListaImpegni(start, 7);
 
             //Li imposto uno ad uno
             foreach(Impegno impegno in listaImpegni) {

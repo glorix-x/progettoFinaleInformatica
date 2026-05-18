@@ -11,35 +11,21 @@ namespace ClassLibraryCalendario {
             listaImpegni = JsonSerializer.Deserialize<List<Impegno>>(testo);
         }
 
-        public List<Impegno> GetListaImpegniSettimana(DateTime lunedi) {
+        public List<Impegno> GetListaImpegni(DateTime inizio, int numGiorni) {
             List<Impegno> lista = new List<Impegno>();
             foreach(Impegno impegno in listaImpegni) {
-                int diff = (impegno.DataFissata.Date - lunedi.Date).Days;
-                if(diff >= 0 && diff <= 6) {
-                    Impegno sovrapposizione = lista.FirstOrDefault(i => SonoSovrapposti(i, impegno));
-                    if(sovrapposizione != null) {
-                        if(OreSovrapposte(impegno, sovrapposizione) == impegno.DurataOre) {
-                            lista.Remove(sovrapposizione);
-                        } else {
-                            int ore = OreSovrapposte(impegno, sovrapposizione);
-                            if(sovrapposizione.DataFissata.CompareTo(impegno.DataFissata) >= 0) {
-                                sovrapposizione.DataFissata = sovrapposizione.DataFissata.AddHours(ore);
-                                sovrapposizione.DurataOre -= ore;
-                            } else {
-                                sovrapposizione.DurataOre -= ore;
-                            }
-                        }
-                    }
+                int diff = (impegno.DataFissata.Date - inizio.Date).Days;
+                if(diff >= 0 && diff <= numGiorni - 1) {
                     lista.Add(impegno);
                 }
                 if(impegno.RipetutoOgni != 0) {
                     ImpegnoRicorrente i = impegno.CreateImpegnoRicorrente();
                     int c = 1;
-                    while((i.DataFissata.Date - lunedi.Date).Days < 6) {
+                    while((i.DataFissata.Date - inizio.Date).Days < numGiorni - 1) {
                         i = impegno.CreateImpegnoRicorrente();
                         i.DataFissata = i.DataFissata.AddDays(impegno.RipetutoOgni * c);
-                        diff = (i.DataFissata.Date - lunedi.Date).Days;
-                        if(diff >= 0 && diff <= 6) {
+                        diff = (i.DataFissata.Date - inizio.Date).Days;
+                        if(diff >= 0 && diff <= numGiorni - 1) {
                             List<Impegno> sovrapposizioni = lista.Where(impegno => SonoSovrapposti(i, impegno)).ToList();
                             foreach(Impegno sovrapposizione in sovrapposizioni) {
                                 if(OreSovrapposte(i, sovrapposizione) < i.DurataOre) {
@@ -55,7 +41,6 @@ namespace ClassLibraryCalendario {
                             lista.Add(i);
                         }
                         c++;
-                        
                     }
                 }
             }
@@ -80,7 +65,7 @@ namespace ClassLibraryCalendario {
 
         public Impegno GetNextImpegno(DateTime ora) {
             Impegno next = null;
-            List<Impegno> listaImpegni = GetListaImpegniSettimana(GetLunedi(ora));
+            List<Impegno> listaImpegni = GetListaImpegni(GetLunedi(ora), 7);
             foreach(Impegno i in listaImpegni) {
                 if(i.DataFissata.CompareTo(ora) > 0 && (next == null || i.DataFissata.CompareTo(next.DataFissata) < 0)) {
                     next = i;
