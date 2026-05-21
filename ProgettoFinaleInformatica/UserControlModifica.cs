@@ -61,7 +61,8 @@ namespace ProgettoFinaleInformatica
 
             cbColore.DataSource = listaColori;
             cbColore.DisplayMember = "Name";
-            cbColore.SelectedIndex = listaColori.IndexOf(listaColori.FirstOrDefault(c => ColorTranslator.FromHtml(i.ColoreHex).R == c.R && ColorTranslator.FromHtml(i.ColoreHex).G == c.G && ColorTranslator.FromHtml(i.ColoreHex).B == c.B));
+            Color colore = ColorTranslator.FromHtml(i.ColoreHex);
+            cbColore.SelectedIndex = listaColori.IndexOf(listaColori.FirstOrDefault(c => colore.R == c.R && colore.G == c.G && colore.B == c.B));
         }
 
         private void cbRipeti_CheckedChanged(object sender, EventArgs e)
