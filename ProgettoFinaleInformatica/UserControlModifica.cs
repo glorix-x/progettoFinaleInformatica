@@ -56,10 +56,12 @@ namespace ProgettoFinaleInformatica
             tbTitoloM.Text = i.Titolo;
             rtbDescrizioneM.Text = i.Descrizione;
             cbDurata.DataSource = Enumerable.Range(1, numOreMax).ToList();
+            cbDurata.SelectedIndex = i.DurataOre - 1;
 
 
             cbColore.DataSource = listaColori;
             cbColore.DisplayMember = "Name";
+            cbColore.SelectedIndex = listaColori.IndexOf(listaColori.FirstOrDefault(c => ColorTranslator.FromHtml(i.ColoreHex).R == c.R && ColorTranslator.FromHtml(i.ColoreHex).G == c.G && ColorTranslator.FromHtml(i.ColoreHex).B == c.B));
         }
 
         private void cbRipeti_CheckedChanged(object sender, EventArgs e)

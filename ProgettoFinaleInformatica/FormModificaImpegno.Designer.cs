@@ -22,47 +22,49 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
-        {
+        private void InitializeComponent() {
             btSalvaM = new Button();
-            btElliminaM = new Button();
+            btEliminaM = new Button();
             ucModifica = new UserControlModifica();
             SuspendLayout();
             // 
             // btSalvaM
             // 
-            btSalvaM.Location = new Point(56, 368);
+            btSalvaM.Location = new Point(70, 460);
+            btSalvaM.Margin = new Padding(4, 4, 4, 4);
             btSalvaM.Name = "btSalvaM";
-            btSalvaM.Size = new Size(200, 46);
+            btSalvaM.Size = new Size(250, 58);
             btSalvaM.TabIndex = 3;
             btSalvaM.Text = "Salva";
             btSalvaM.UseVisualStyleBackColor = true;
             btSalvaM.Click += btSalvaM_Click;
             // 
-            // btElliminaM
+            // btEliminaM
             // 
-            btElliminaM.Location = new Point(451, 368);
-            btElliminaM.Name = "btElliminaM";
-            btElliminaM.Size = new Size(180, 46);
-            btElliminaM.TabIndex = 4;
-            btElliminaM.Text = "Elimina";
-            btElliminaM.UseVisualStyleBackColor = true;
-            btElliminaM.Click += btElliminaM_Click;
+            btEliminaM.Location = new Point(564, 460);
+            btEliminaM.Margin = new Padding(4, 4, 4, 4);
+            btEliminaM.Name = "btEliminaM";
+            btEliminaM.Size = new Size(225, 58);
+            btEliminaM.TabIndex = 4;
+            btEliminaM.Text = "Elimina";
+            btEliminaM.UseVisualStyleBackColor = true;
+            btEliminaM.Click += btEliminaM_Click;
             // 
             // ucModifica
             // 
-            ucModifica.Location = new Point(56, -4);
+            ucModifica.Location = new Point(70, -5);
+            ucModifica.Margin = new Padding(5, 5, 5, 5);
             ucModifica.Name = "ucModifica";
-            ucModifica.Size = new Size(618, 366);
+            ucModifica.Size = new Size(772, 458);
             ucModifica.TabIndex = 5;
             // 
             // FormModificaImpegno
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(741, 445);
+            ClientSize = new Size(926, 556);
             Controls.Add(ucModifica);
-            Controls.Add(btElliminaM);
+            Controls.Add(btEliminaM);
             Controls.Add(btSalvaM);
             Margin = new Padding(2);
             Name = "FormModificaImpegno";
@@ -72,7 +74,7 @@
 
         #endregion
         private Button btSalvaM;
-        private Button btElliminaM;
+        private Button btEliminaM;
         private UserControlModifica ucModifica;
     }
 }
