@@ -22,7 +22,8 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() {
+        private void InitializeComponent()
+        {
             btSalvaM = new Button();
             btEliminaM = new Button();
             ucModifica = new UserControlModifica();
@@ -30,10 +31,9 @@
             // 
             // btSalvaM
             // 
-            btSalvaM.Location = new Point(70, 460);
-            btSalvaM.Margin = new Padding(4, 4, 4, 4);
+            btSalvaM.Location = new Point(56, 368);
             btSalvaM.Name = "btSalvaM";
-            btSalvaM.Size = new Size(250, 58);
+            btSalvaM.Size = new Size(200, 46);
             btSalvaM.TabIndex = 3;
             btSalvaM.Text = "Salva";
             btSalvaM.UseVisualStyleBackColor = true;
@@ -41,10 +41,9 @@
             // 
             // btEliminaM
             // 
-            btEliminaM.Location = new Point(564, 460);
-            btEliminaM.Margin = new Padding(4, 4, 4, 4);
+            btEliminaM.Location = new Point(451, 368);
             btEliminaM.Name = "btEliminaM";
-            btEliminaM.Size = new Size(225, 58);
+            btEliminaM.Size = new Size(180, 46);
             btEliminaM.TabIndex = 4;
             btEliminaM.Text = "Elimina";
             btEliminaM.UseVisualStyleBackColor = true;
@@ -52,23 +51,23 @@
             // 
             // ucModifica
             // 
-            ucModifica.Location = new Point(70, -5);
-            ucModifica.Margin = new Padding(5, 5, 5, 5);
+            ucModifica.Location = new Point(56, 2);
             ucModifica.Name = "ucModifica";
-            ucModifica.Size = new Size(772, 458);
+            ucModifica.Size = new Size(645, 360);
             ucModifica.TabIndex = 5;
             // 
             // FormModificaImpegno
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(926, 556);
+            ClientSize = new Size(741, 445);
             Controls.Add(ucModifica);
             Controls.Add(btEliminaM);
             Controls.Add(btSalvaM);
             Margin = new Padding(2);
             Name = "FormModificaImpegno";
             Text = "FormModificaImpegno";
+            Load += FormModificaImpegno_Load;
             ResumeLayout(false);
         }
 

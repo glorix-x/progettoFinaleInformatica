@@ -38,6 +38,7 @@
             lblDurata = new Label();
             cbRipeti = new CheckBox();
             tbRipeti = new TextBox();
+            label3 = new Label();
             SuspendLayout();
             // 
             // label2
@@ -118,18 +119,31 @@
             cbRipeti.TabIndex = 20;
             cbRipeti.Text = "Ripeti";
             cbRipeti.UseVisualStyleBackColor = true;
+            cbRipeti.CheckedChanged += cbRipeti_CheckedChanged_1;
             // 
             // tbRipeti
             // 
-            tbRipeti.Location = new Point(451, 117);
+            tbRipeti.Location = new Point(453, 181);
             tbRipeti.Name = "tbRipeti";
             tbRipeti.Size = new Size(125, 27);
             tbRipeti.TabIndex = 21;
+            tbRipeti.Visible = false;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(453, 144);
+            label3.Name = "label3";
+            label3.Size = new Size(137, 20);
+            label3.TabIndex = 22;
+            label3.Text = "Ogni quanti giorni?";
+            label3.Visible = false;
             // 
             // UserControlModifica
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(label3);
             Controls.Add(tbRipeti);
             Controls.Add(cbRipeti);
             Controls.Add(cbDurata);
@@ -157,5 +171,6 @@
         private Label lblDurata;
         private CheckBox cbRipeti;
         private TextBox tbRipeti;
+        private Label label3;
     }
 }

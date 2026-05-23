@@ -47,7 +47,7 @@ namespace ProgettoFinaleInformatica
             {
                 cbRipeti.Checked = false;
                 tbRipeti.Text = "";
-                tbRipeti.Enabled = false; 
+                tbRipeti.Enabled = false;
             }
         }
 
@@ -62,7 +62,11 @@ namespace ProgettoFinaleInformatica
             cbColore.DataSource = listaColori;
             cbColore.DisplayMember = "Name";
             Color colore = ColorTranslator.FromHtml(i.ColoreHex);
-            cbColore.SelectedIndex = listaColori.IndexOf(listaColori.FirstOrDefault(c => colore.R == c.R && colore.G == c.G && colore.B == c.B));
+            //cbColore.SelectedIndex = listaColori.IndexOf(listaColori.FirstOrDefault(c => colore.R == c.R && colore.G == c.G && colore.B == c.B));
+            cbColore.SelectedIndex = Array.IndexOf(
+                listaColori,
+                listaColori.FirstOrDefault(c => colore.R == c.R && colore.G == c.G && colore.B == c.B)
+            );
         }
 
         private void cbRipeti_CheckedChanged(object sender, EventArgs e)
@@ -80,9 +84,12 @@ namespace ProgettoFinaleInformatica
         public void ModificaImpegno(Impegno i)
         {
             Impegno impegno = null;
-            if(i is ImpegnoRicorrente) {
+            if (i is ImpegnoRicorrente)
+            {
                 impegno = ((ImpegnoRicorrente)i).ImpegnoOrigine;
-            } else {
+            }
+            else
+            {
                 impegno = i;
             }
 
@@ -97,7 +104,21 @@ namespace ProgettoFinaleInformatica
             }
             else
             {
-                impegno.RipetutoOgni = 0; 
+                impegno.RipetutoOgni = 0;
+            }
+        }
+
+        private void cbRipeti_CheckedChanged_1(object sender, EventArgs e)
+        {
+            if (cbRipeti.Checked)
+            {
+                label3.Show();
+                tbRipeti.Show();
+            }
+            else
+            {
+                label3.Hide();
+                tbRipeti.Hide();
             }
         }
     }

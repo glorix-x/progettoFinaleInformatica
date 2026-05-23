@@ -58,9 +58,11 @@ namespace ProgettoFinaleInformatica
             BindingList<Impegno> binding = new BindingList<Impegno>(g.Ottimizza(impegniDaOttimizzare.ToList()));
             if (binding.Count == 0) this.Close();
             else dgvImpegni.DataSource = binding;
-   
+
             MessageBox.Show("Ottimizzazione completata!");
-            
+            labelOttimizzazione.Text = "Impegni non ottimizzati: " + binding.Count.ToString() + "\n Ore non sufficienti!!";
+
         }
+
     }
 }

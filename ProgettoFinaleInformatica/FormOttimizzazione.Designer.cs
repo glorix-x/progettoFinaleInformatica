@@ -43,6 +43,7 @@
             rtbDescrizione = new RichTextBox();
             dtpDeadline = new DateTimePicker();
             btnOttimizza = new Button();
+            labelOttimizzazione = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvImpegni).BeginInit();
             SuspendLayout();
             // 
@@ -168,7 +169,7 @@
             // 
             // btnOttimizza
             // 
-            btnOttimizza.Location = new Point(589, 380);
+            btnOttimizza.Location = new Point(361, 379);
             btnOttimizza.Name = "btnOttimizza";
             btnOttimizza.Size = new Size(175, 47);
             btnOttimizza.TabIndex = 13;
@@ -176,11 +177,20 @@
             btnOttimizza.UseVisualStyleBackColor = true;
             btnOttimizza.Click += btnOttimizza_Click;
             // 
+            // labelOttimizzazione
+            // 
+            labelOttimizzazione.AutoSize = true;
+            labelOttimizzazione.Location = new Point(632, 392);
+            labelOttimizzazione.Name = "labelOttimizzazione";
+            labelOttimizzazione.Size = new Size(0, 20);
+            labelOttimizzazione.TabIndex = 14;
+            // 
             // FormOttimizzazione
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1020, 450);
+            Controls.Add(labelOttimizzazione);
             Controls.Add(btnOttimizza);
             Controls.Add(dtpDeadline);
             Controls.Add(rtbDescrizione);
@@ -219,5 +229,6 @@
         private DateTimePicker dtpDeadline;
         private Button btnOttimizza;
         private DataGridViewButtonColumn Elimina;
+        private Label labelOttimizzazione;
     }
 }
