@@ -35,6 +35,7 @@
             cbColore = new ComboBox();
             cbRipetere = new CheckBox();
             txtGiorniDaRipetere = new TextBox();
+            label3 = new Label();
             SuspendLayout();
             // 
             // txtTitolo
@@ -126,27 +127,40 @@
             // cbRipetere
             // 
             cbRipetere.AutoSize = true;
-            cbRipetere.Location = new Point(470, 69);
-            cbRipetere.Margin = new Padding(2, 2, 2, 2);
+            cbRipetere.Location = new Point(446, 130);
+            cbRipetere.Margin = new Padding(2);
             cbRipetere.Name = "cbRipetere";
             cbRipetere.Size = new Size(87, 24);
             cbRipetere.TabIndex = 10;
             cbRipetere.Text = "Ripetere";
             cbRipetere.UseVisualStyleBackColor = true;
+            cbRipetere.CheckedChanged += cbRipetere_CheckedChanged;
             // 
             // txtGiorniDaRipetere
             // 
-            txtGiorniDaRipetere.Location = new Point(446, 112);
-            txtGiorniDaRipetere.Margin = new Padding(2, 2, 2, 2);
+            txtGiorniDaRipetere.Location = new Point(446, 208);
+            txtGiorniDaRipetere.Margin = new Padding(2);
             txtGiorniDaRipetere.Name = "txtGiorniDaRipetere";
             txtGiorniDaRipetere.Size = new Size(121, 27);
             txtGiorniDaRipetere.TabIndex = 11;
+            txtGiorniDaRipetere.Visible = false;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(446, 167);
+            label3.Name = "label3";
+            label3.Size = new Size(137, 20);
+            label3.TabIndex = 23;
+            label3.Text = "Ogni quanti giorni?";
+            label3.Visible = false;
             // 
             // FormCreazioneImpegno
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(640, 417);
+            Controls.Add(label3);
             Controls.Add(txtGiorniDaRipetere);
             Controls.Add(cbRipetere);
             Controls.Add(cbColore);
@@ -161,6 +175,7 @@
             Margin = new Padding(2);
             Name = "FormCreazioneImpegno";
             Text = "FormCreazioneImpegno";
+            Load += FormCreazioneImpegno_Load;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -178,5 +193,6 @@
         private ComboBox cbColore;
         private CheckBox cbRipetere;
         private TextBox txtGiorniDaRipetere;
+        private Label label3;
     }
 }

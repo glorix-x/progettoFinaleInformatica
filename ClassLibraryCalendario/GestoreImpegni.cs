@@ -116,16 +116,29 @@ namespace ClassLibraryCalendario {
         */
         private bool SlotLibero(DateTime inizio, int durata)
         {
+            // Calcolo l'orario di fine dello slot
             DateTime fine = inizio.AddHours(durata);
 
-            foreach (Impegno i in listaImpegni)
+            // Calcolo quanti giorni copre lo slot
+            int giorni = (fine.Date - inizio.Date).Days + 1;
+
+            // Recupero tutti gli impegni presenti
+            List<Impegno> impegni = GetListaImpegni(inizio.Date, giorni);
+
+            // Controllo ogni impegno presente
+            foreach (Impegno i in impegni)
             {
+                // Inizio dell'impegno corrente
                 DateTime start = i.DataFissata;
+
+                // Fine dell'impegno corrente
                 DateTime end = i.DataFissata.AddHours(i.DurataOre);
 
-                bool libero = inizio < end && fine > start;
+                // Verifico se i due intervalli si sovrappongono
+                bool occupato = inizio < end && fine > start;
 
-                if (libero)
+                
+                if (occupato)
                     return false;
             }
 

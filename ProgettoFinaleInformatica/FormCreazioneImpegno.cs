@@ -9,8 +9,9 @@ using System.Text;
 using System.Windows.Forms;
 
 namespace ProgettoFinaleInformatica {
-    public partial class FormCreazioneImpegno : Form {
-        public static Color[] listaColori = { Color.OrangeRed, Color.LightBlue, Color.LightPink, Color.Yellow, Color.Green};
+    public partial class FormCreazioneImpegno : Form
+    {
+        public static Color[] listaColori = { Color.OrangeRed, Color.LightBlue, Color.LightPink, Color.Yellow, Color.Green };
         private GestoreImpegni gestore;
         private DateTime giorno;
         private FormSettimana form;
@@ -70,15 +71,20 @@ namespace ProgettoFinaleInformatica {
             {
                 bool errore = false;
                 int ripetereOgni = 0;
-                if(cbRipetere.Checked) {
-                    try {
+                if (cbRipetere.Checked)
+                {
+                    try
+                    {
                         ripetereOgni = Convert.ToInt32(txtGiorniDaRipetere.Text.Trim());
-                    } catch(Exception ex) {
+                    }
+                    catch (Exception ex)
+                    {
                         MessageBox.Show("Inserire un numero valido come giorni da ripetere");
                         errore = true;
                     }
                 }
-                if(!errore) {
+                if (!errore)
+                {
                     //Creo l'impegno e lo aggiungo al gestore e alla griglia
                     Impegno nuovoImpegno = new Impegno(titolo, descrizione, giorno, giorno, durata, true, ripetereOgni, ColoreHex(colore));
                     gestore.AddImpegno(nuovoImpegno);
@@ -92,6 +98,25 @@ namespace ProgettoFinaleInformatica {
         private string ColoreHex(Color colore)
         {
             return $"#{colore.R:X2}{colore.G:X2}{colore.B:X2}";
+        }
+
+        private void FormCreazioneImpegno_Load(object sender, EventArgs e)
+        {
+            this.BackColor = Color.LightYellow;
+        }
+
+        private void cbRipetere_CheckedChanged(object sender, EventArgs e)
+        {
+            if(cbRipetere.Checked)
+            {
+                label3.Show();
+                txtGiorniDaRipetere.Show();
+            }
+            else
+            {
+                label3.Hide();
+                txtGiorniDaRipetere.Hide();
+            }
         }
     }
 }

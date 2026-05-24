@@ -7,7 +7,8 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace ProgettoFinaleInformatica {
+namespace ProgettoFinaleInformatica
+{
     public partial class FormModificaImpegno : Form
     {
         private Impegno impegno;
@@ -18,7 +19,7 @@ namespace ProgettoFinaleInformatica {
             InitializeComponent();
             this.impegno = impegno;
             this.gestore = gestore;
-            this.form = form; 
+            this.form = form;
             ucModifica.GetData(impegno, gestore);
             DateTime giorno = impegno.DataFissata;
             int numOreMax = 0;
@@ -38,22 +39,30 @@ namespace ProgettoFinaleInformatica {
 
         private void btSalvaM_Click(object sender, EventArgs e)
         {
-            ucModifica.ModificaImpegno(impegno); 
-            form.Aggiorna();                   
-            form.Show();                      
+            ucModifica.ModificaImpegno(impegno);
+            form.Aggiorna();
+            form.Show();
             this.Close();
         }
 
         private void btEliminaM_Click(object sender, EventArgs e)
         {
-            if(impegno is ImpegnoRicorrente) {
+            if (impegno is ImpegnoRicorrente)
+            {
                 gestore.RimuoviImpegno(((ImpegnoRicorrente)impegno).ImpegnoOrigine);
-            } else {
+            }
+            else
+            {
                 gestore.RimuoviImpegno(impegno);
             }
             form.Aggiorna();
             form.Show();
             this.Close();
+        }
+
+        private void FormModificaImpegno_Load(object sender, EventArgs e)
+        {
+            this.BackColor = ColorTranslator.FromHtml(impegno.ColoreHex);
         }
     }
 }
