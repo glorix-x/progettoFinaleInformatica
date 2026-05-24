@@ -12,40 +12,43 @@ namespace ClassLibraryCalendario {
         }
 
         public List<Impegno> GetListaImpegni(DateTime inizio, int numGiorni) {
+            listaImpegni = listaImpegni.OrderByDescending(x => x.RipetutoOgni == 0).ThenBy(x => x.DurataOre).ThenBy(x => x.DataFissata).ToList();
             List<Impegno> lista = new List<Impegno>();
             foreach(Impegno impegno in listaImpegni) {
                 int diff = (impegno.DataFissata.Date - inizio.Date).Days;
-                if(diff >= 0 && diff <= numGiorni - 1) {
+                if(diff >= 0 && diff <= numGiorni - 1 && impegno.RipetutoOgni == 0) {
                     lista.Add(impegno);
-                }
-                if(impegno.RipetutoOgni != 0) {
+                } else if(impegno.RipetutoOgni != 0) {
                     List<Impegno> impegni = new List<Impegno>();
-                    impegni.Add(impegno.CreateImpegnoRicorrente());
-                    int c = 1;
-                    while((impegni[impegni.Count - 1].DataFissata.Date - inizio.Date).Days < numGiorni - 1) {
+                    int c = 0;
+                    while((impegno.DataFissata.AddDays(impegno.RipetutoOgni * c).Date - inizio.Date).Days < numGiorni) {
                         impegni = new List<Impegno>();
                         impegni.Add(impegno.CreateImpegnoRicorrente());
                         Impegno i = impegni[impegni.Count - 1];
                         i.DataFissata = i.DataFissata.AddDays(impegno.RipetutoOgni * c);
                         diff = (i.DataFissata.Date - inizio.Date).Days;
                         if(diff >= 0 && diff <= numGiorni - 1) {
-                            List<Impegno> sovrapposizioni = lista.Where(impegno => SonoSovrapposti(i, impegno)).ToList();
+                            List<Impegno> sovrapposizioni = lista.Where(impegno => SonoSovrapposti(i, impegno)).OrderBy(x => x.DataFissata).ToList();
                             foreach(Impegno sovrapposizione in sovrapposizioni) {
                                 i = impegni[impegni.Count - 1];
                                 if(sovrapposizione.DataFissata.CompareTo(i.DataFissata) > 0 && sovrapposizione.DataFissata.AddHours(sovrapposizione.DurataOre).CompareTo(i.DataFissata.AddHours(i.DurataOre)) < 0) {
                                     ImpegnoRicorrente i1 = new ImpegnoRicorrente(i.Titolo, i.Descrizione, i.Deadline, i.DataFissata, (sovrapposizione.DataFissata - i.DataFissata).Hours, i.Fisso, i.RipetutoOgni, i.ColoreHex, impegno);
-                                    ImpegnoRicorrente i2 = new ImpegnoRicorrente(i.Titolo, i.Descrizione, i.Deadline, sovrapposizione.DataFissata.AddHours(sovrapposizione.DurataOre), i.DataFissata.AddHours(i.DurataOre).Hour - sovrapposizione.DataFissata.AddHours(sovrapposizione.DurataOre).Hour, i.Fisso, i.RipetutoOgni, i.ColoreHex, impegno);
-                                    impegni.Add(i1);
+                                    ImpegnoRicorrente i2 = new ImpegnoRicorrente(i.Titolo, i.Descrizione, i.Deadline, sovrapposizione.DataFissata.AddHours(sovrapposizione.DurataOre), i.DataFissata.Hour + i.DurataOre - (sovrapposizione.DataFissata.Hour + sovrapposizione.DurataOre), i.Fisso, i.RipetutoOgni, i.ColoreHex, impegno);
+                                    if(i1.DurataOre != 0) {
+                                        impegni.Add(i1);
+                                    }
                                     impegni.Add(i2);
                                     impegni.Remove(i);
                                 } else if(OreSovrapposte(i, sovrapposizione) < i.DurataOre) {
                                     int ore = OreSovrapposte(i, sovrapposizione);
                                     if(i.DataFissata.CompareTo(sovrapposizione.DataFissata) >= 0) {
                                         i.DataFissata = i.DataFissata.AddHours(ore);
-                                        i.DurataOre -= ore; 
+                                        i.DurataOre -= ore;
                                     } else {
                                         i.DurataOre -= ore;
                                     }
+                                } else {
+                                    impegni.Remove(i);
                                 }
                             }
                             foreach(Impegno imp in impegni) {
