@@ -21,7 +21,7 @@ namespace ClassLibraryCalendario {
             
             foreach(Impegno impegno in listaImpegni) {
                 int diff = (impegno.DataFissata.Date - inizio.Date).Days;
-                //Se un impegno non è ripetuto e rientra nella settimana viene aggiunto alla lista
+                //Se un impegno non è ripetuto e rientra nell'intervallo viene aggiunto alla lista
                 if(diff >= 0 && diff <= numGiorni - 1 && impegno.RipetutoOgni == 0) {
                     lista.Add(impegno);
                 //Se un impegno è ripetuto scorro tutte le sue ricorrenze fino a che non supero il numero di giorni dell'intervallo
