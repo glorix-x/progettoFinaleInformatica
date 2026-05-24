@@ -191,18 +191,16 @@ namespace ClassLibraryCalendario {
                     {
                         imp.DataFissata = corrente;
 
-                        listaImpegni.Add(imp);
-
                         trovato = true;
                         break;
                     }
 
                     corrente = corrente.AddHours(1);
                 }
-                AddImpegno(imp);
 
                 if (trovato)
                 {
+                    AddImpegno(imp);
                     daRimuovere.Add(imp);
                 }
             }

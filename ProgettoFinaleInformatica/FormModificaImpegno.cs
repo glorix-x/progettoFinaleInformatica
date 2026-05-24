@@ -24,15 +24,16 @@ namespace ProgettoFinaleInformatica
             DateTime giorno = impegno.DataFissata;
             int numOreMax = 0;
 
-            Impegno prossimoImpegno = gestore.GetNextImpegno(giorno);
-            if (prossimoImpegno != null && prossimoImpegno.DataFissata.Date.CompareTo(giorno.Date) == 0)
-            {
-                DateTime oraProssimoImpegno = prossimoImpegno.DataFissata;
-                numOreMax = oraProssimoImpegno.Hour - giorno.Hour;
-            }
-            else
-            {
-                numOreMax = 24 - giorno.Hour;
+            if(!(impegno is ImpegnoRicorrente)) {
+                Impegno prossimoImpegno = gestore.GetNextImpegno(giorno);
+                if(prossimoImpegno != null && prossimoImpegno.DataFissata.Date.CompareTo(giorno.Date) == 0) {
+                    DateTime oraProssimoImpegno = prossimoImpegno.DataFissata;
+                    numOreMax = oraProssimoImpegno.Hour - giorno.Hour;
+                } else {
+                    numOreMax = 24 - giorno.Hour;
+                }
+            } else {
+                numOreMax = 24 - ((ImpegnoRicorrente)impegno).ImpegnoOrigine.DataFissata.Hour;
             }
             ucModifica.SetData(numOreMax);
         }
