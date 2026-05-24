@@ -68,9 +68,6 @@ namespace ProgettoFinaleInformatica {
 
             string url = "https://gofund.me/4b361fdd5";
 
-            // Imposta lo stato del link su "visitato" per cambiare colore
-            linkLabel1.LinkVisited = true;
-
             // Avvia il browser predefinito
             System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
             {
