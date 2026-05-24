@@ -93,9 +93,7 @@ namespace ProgettoFinaleInformatica
 
             impegno.Titolo = tbTitoloM.Text;
             impegno.Descrizione = rtbDescrizioneM.Text;
-            if(cbRipeti.Checked) {
-                impegno.DurataOre = (int)cbDurata.SelectedValue;
-            }
+            impegno.DurataOre = (int)cbDurata.SelectedValue;
             impegno.ColoreHex = ColoreHex(listaColori[cbColore.SelectedIndex]);
 
             if (cbRipeti.Checked && int.TryParse(tbRipeti.Text, out int giorni) && giorni > 0)
