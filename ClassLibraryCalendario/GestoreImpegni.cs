@@ -21,7 +21,7 @@ namespace ClassLibraryCalendario {
             
             foreach(Impegno impegno in listaImpegni) {
                 int diff = (impegno.DataFissata.Date - inizio.Date).Days;
-                //Se un impegno non è ripetuto e rientra nella settimana viene aggiunto alla lista
+                //Se un impegno non è ripetuto e rientra nell'intervallo viene aggiunto alla lista
                 if(diff >= 0 && diff <= numGiorni - 1 && impegno.RipetutoOgni == 0) {
                     lista.Add(impegno);
                 //Se un impegno è ripetuto scorro tutte le sue ricorrenze fino a che non supero il numero di giorni dell'intervallo
@@ -133,7 +133,7 @@ namespace ClassLibraryCalendario {
             listaImpegni.Remove(impegno);
         }
         /*
-            parte da ORA
+            parte da ora
             cerca il primo buco libero
             mette gli impegni prima della deadline
             evita sovrapposizioni
@@ -173,21 +173,31 @@ namespace ClassLibraryCalendario {
         }
         public List<Impegno> Ottimizza(List<Impegno> daOttimizzare)
         {
-            // Ordino per deadline
+            // Ordina gli impegni:
+            // prima per scadenza più vicina,
+            // poi per durata maggiore
             daOttimizzare = daOttimizzare
                 .OrderBy(i => i.Deadline)
                 .ThenByDescending(i => i.DurataOre)
                 .ToList();
+
+            // Lista degli impegni che verranno pianificati correttamente
             List<Impegno> daRimuovere = new List<Impegno>();
+
+           
             foreach (Impegno imp in daOttimizzare)
             {
+                // Parto dalla data e ora corrente
                 DateTime corrente = DateTime.Now;
 
+                // Variabile che indica se è stato trovato uno slot libero
                 bool trovato = false;
 
+                // Continuo finché non supero la deadline dell’impegno
                 while (corrente < imp.Deadline)
                 {
-                    // Evita notte
+                    // Evita orari notturni:
+                    // se prima delle 8, sposta alle 8:00
                     if (corrente.Hour < 8)
                     {
                         corrente = new DateTime(
@@ -198,43 +208,62 @@ namespace ClassLibraryCalendario {
                         );
                     }
 
-                    // Evita oltre le 22
+                    // Evita orari oltre le 22:
+                    // se l’impegno finirebbe troppo tardi,
+                    // passa al giorno successivo alle 8
                     if (corrente.Hour + imp.DurataOre > 22)
                     {
                         corrente = corrente.Date.AddDays(1).AddHours(8);
                         continue;
                     }
 
-                    // Evita weekend
+                    // Evita il weekend:
+                    // se è sabato o domenica,
+                    // passa al giorno successivo
                     if (corrente.DayOfWeek == DayOfWeek.Saturday ||
-                       corrente.DayOfWeek == DayOfWeek.Sunday)
+                        corrente.DayOfWeek == DayOfWeek.Sunday)
                     {
                         corrente = corrente.Date.AddDays(1).AddHours(8);
                         continue;
                     }
 
-                    // Controllo slot
+                    // Controlla se lo slot è libero
                     if (SlotLibero(corrente, imp.DurataOre))
                     {
+                        // Assegna la data trovata all’impegno
                         imp.DataFissata = corrente;
 
+                        // Segna che è stato trovato uno slot valido
                         trovato = true;
+
+                        // Esce dal ciclo while
                         break;
                     }
 
+                    // Se lo slot non è libero,
+                    // prova un’ora dopo
                     corrente = corrente.AddHours(1);
                 }
 
+                // Se è stato trovato uno slot disponibile
                 if (trovato)
                 {
+                    // Aggiunge l’impegno al calendario
                     AddImpegno(imp);
+
+                    // Segna l’impegno per la rimozione
+                    // dalla lista da ottimizzare
                     daRimuovere.Add(imp);
                 }
             }
-            foreach(Impegno i in daRimuovere)
+
+            // Rimuove dalla lista gli impegni già pianificati
+            foreach (Impegno i in daRimuovere)
             {
                 daOttimizzare.Remove(i);
             }
+
+            // Restituisce eventuali impegni non pianificati
             return daOttimizzare;
         }
     }
