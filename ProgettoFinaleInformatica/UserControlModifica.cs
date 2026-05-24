@@ -41,13 +41,11 @@ namespace ProgettoFinaleInformatica
             {
                 cbRipeti.Checked = true;
                 tbRipeti.Text = i.RipetutoOgni.ToString();
-                tbRipeti.Enabled = true;
             }
             else
             {
                 cbRipeti.Checked = false;
                 tbRipeti.Text = "";
-                tbRipeti.Enabled = false;
             }
         }
 
@@ -95,7 +93,9 @@ namespace ProgettoFinaleInformatica
 
             impegno.Titolo = tbTitoloM.Text;
             impegno.Descrizione = rtbDescrizioneM.Text;
-            impegno.DurataOre = (int)cbDurata.SelectedValue;
+            if(cbRipeti.Checked) {
+                impegno.DurataOre = (int)cbDurata.SelectedValue;
+            }
             impegno.ColoreHex = ColoreHex(listaColori[cbColore.SelectedIndex]);
 
             if (cbRipeti.Checked && int.TryParse(tbRipeti.Text, out int giorni) && giorni > 0)
