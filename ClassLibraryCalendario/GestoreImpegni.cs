@@ -12,26 +12,49 @@ namespace ClassLibraryCalendario {
         }
 
         public List<Impegno> GetListaImpegni(DateTime inizio, int numGiorni) {
+            //Ordino la lista degli impegni in base a se sono ripetuti o no
+            //Poi in base alla durata
+            //Poi in base alla data
             listaImpegni = listaImpegni.OrderByDescending(x => x.RipetutoOgni == 0).ThenBy(x => x.DurataOre).ThenBy(x => x.DataFissata).ToList();
+            
             List<Impegno> lista = new List<Impegno>();
+            
             foreach(Impegno impegno in listaImpegni) {
                 int diff = (impegno.DataFissata.Date - inizio.Date).Days;
+                //Se un impegno non è ripetuto e rientra nella settimana viene aggiunto alla lista
                 if(diff >= 0 && diff <= numGiorni - 1 && impegno.RipetutoOgni == 0) {
                     lista.Add(impegno);
+                //Se un impegno è ripetuto scorro tutte le sue ricorrenze fino a che non supero il numero di giorni dell'intervallo
                 } else if(impegno.RipetutoOgni != 0) {
+                    //Istanzio una lista nella quale metterò tutte le parti di
+                    //un impegno se viene frammentato a causa di sovrapposizioni
                     List<Impegno> impegni = new List<Impegno>();
+                    
                     int c = 0;
+
                     while((impegno.DataFissata.AddDays(impegno.RipetutoOgni * c).Date - inizio.Date).Days < numGiorni) {
                         impegni = new List<Impegno>();
+                        //Per ogni impegno ricorrente ne creo una copia ricorrente
                         impegni.Add(impegno.CreateImpegnoRicorrente());
+
                         Impegno i = impegni[impegni.Count - 1];
+
+                        //Incremento la data dell'impegno in base a ogni quanto si deve ripetere
                         i.DataFissata = i.DataFissata.AddDays(impegno.RipetutoOgni * c);
+                        
                         diff = (i.DataFissata.Date - inizio.Date).Days;
+
+                        //Se non rientra nell'intervallo lo salto
                         if(diff >= 0 && diff <= numGiorni - 1) {
+                            //Cerco le sovrapposizioni
                             List<Impegno> sovrapposizioni = lista.Where(impegno => SonoSovrapposti(i, impegno)).OrderBy(x => x.DataFissata).ToList();
+
                             foreach(Impegno sovrapposizione in sovrapposizioni) {
+                                //Salvo sempre nella variabile i l'ultimo frammento dell'impegno che ho creato
                                 i = impegni[impegni.Count - 1];
+                                //Se la sovrapposizone si trova in mezza all'impegno
                                 if(sovrapposizione.DataFissata.CompareTo(i.DataFissata) > 0 && sovrapposizione.DataFissata.AddHours(sovrapposizione.DurataOre).CompareTo(i.DataFissata.AddHours(i.DurataOre)) < 0) {
+                                    //Divido l'impegno in due frammenti: uno prima e uno dopo all'ostacolo
                                     ImpegnoRicorrente i1 = new ImpegnoRicorrente(i.Titolo, i.Descrizione, i.Deadline, i.DataFissata, (sovrapposizione.DataFissata - i.DataFissata).Hours, i.Fisso, i.RipetutoOgni, i.ColoreHex, impegno);
                                     ImpegnoRicorrente i2 = new ImpegnoRicorrente(i.Titolo, i.Descrizione, i.Deadline, sovrapposizione.DataFissata.AddHours(sovrapposizione.DurataOre), i.DataFissata.Hour + i.DurataOre - (sovrapposizione.DataFissata.Hour + sovrapposizione.DurataOre), i.Fisso, i.RipetutoOgni, i.ColoreHex, impegno);
                                     if(i1.DurataOre != 0) {
@@ -39,7 +62,9 @@ namespace ClassLibraryCalendario {
                                     }
                                     impegni.Add(i2);
                                     impegni.Remove(i);
+                                //Se invece si sovrappone solo una parte ma non del tutto
                                 } else if(OreSovrapposte(i, sovrapposizione) < i.DurataOre) {
+                                    //Rimuovo dall'impegno ricorrente le ore che si sovrapporrebbero
                                     int ore = OreSovrapposte(i, sovrapposizione);
                                     if(i.DataFissata.CompareTo(sovrapposizione.DataFissata) >= 0) {
                                         i.DataFissata = i.DataFissata.AddHours(ore);
@@ -47,10 +72,12 @@ namespace ClassLibraryCalendario {
                                     } else {
                                         i.DurataOre -= ore;
                                     }
+                                //Altrimenti se gli impegni si sovrappongono completamente lascio solo quello precedente
                                 } else {
                                     impegni.Remove(i);
                                 }
                             }
+                            //Aggiungo alla lista tutti i frammenti dell'impegno
                             foreach(Impegno imp in impegni) {
                                 lista.Add(imp);
                             }
