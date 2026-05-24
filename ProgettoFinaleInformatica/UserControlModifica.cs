@@ -54,7 +54,11 @@ namespace ProgettoFinaleInformatica
             tbTitoloM.Text = i.Titolo;
             rtbDescrizioneM.Text = i.Descrizione;
             cbDurata.DataSource = Enumerable.Range(1, numOreMax).ToList();
-            cbDurata.SelectedIndex = i.DurataOre - 1;
+            if(i is ImpegnoRicorrente) {
+                cbDurata.SelectedIndex = ((ImpegnoRicorrente)i).ImpegnoOrigine.DurataOre - 1;
+            } else {
+                cbDurata.SelectedIndex = i.DurataOre - 1;
+            }
 
 
             cbColore.DataSource = listaColori;
