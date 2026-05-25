@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System.ComponentModel;
+using System.Drawing;
 
 namespace ClassLibraryCalendario {
     public class Impegno {
@@ -25,9 +26,12 @@ namespace ClassLibraryCalendario {
         public string Titolo { get => titolo; set => titolo = value; }
         public string Descrizione { get => descrizione; set => descrizione = value; }
         public DateTime Deadline { get => deadline; set => deadline = value; }
+        [Browsable(false)]
         public DateTime DataFissata { get => dataFissata; set => dataFissata = value; }
         public int DurataOre { get => durataOre; set => durataOre = value; }
+        [Browsable(false)]
         public bool Fisso { get => fisso; set => fisso = value; }
+        [Browsable(false)]
         public int RipetutoOgni { get => ripetutoOgni; set => ripetutoOgni = value; }
         public string ColoreHex { get => coloreHex; set => coloreHex = value; }
 
