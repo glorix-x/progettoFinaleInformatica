@@ -132,15 +132,7 @@ namespace ClassLibraryCalendario {
         {
             listaImpegni.Remove(impegno);
         }
-        /*
-            parte da ora
-            cerca il primo buco libero
-            mette gli impegni prima della deadline
-            evita sovrapposizioni
-            evita notte
-            evita weekend
-            dà priorità alle scadenze vicine
-        */
+        
         private bool SlotLibero(DateTime inizio, int durata)
         {
             // Calcolo l'orario di fine dello slot
