@@ -210,10 +210,9 @@ namespace ClassLibraryCalendario {
                     }
 
                     // Evita il weekend:
-                    // se è sabato o domenica,
+                    // se è domenica,
                     // passa al giorno successivo
-                    if (corrente.DayOfWeek == DayOfWeek.Saturday ||
-                        corrente.DayOfWeek == DayOfWeek.Sunday)
+                    if (corrente.DayOfWeek == DayOfWeek.Sunday)
                     {
                         corrente = corrente.Date.AddDays(1).AddHours(8);
                         continue;
@@ -228,7 +227,6 @@ namespace ClassLibraryCalendario {
                         // Segna che è stato trovato uno slot valido
                         trovato = true;
 
-                        // Esce dal ciclo while
                         break;
                     }
 
@@ -237,25 +235,20 @@ namespace ClassLibraryCalendario {
                     corrente = corrente.AddHours(1);
                 }
 
-                // Se è stato trovato uno slot disponibile
                 if (trovato)
                 {
-                    // Aggiunge l’impegno al calendario
+                    
                     AddImpegno(imp);
 
-                    // Segna l’impegno per la rimozione
-                    // dalla lista da ottimizzare
                     daRimuovere.Add(imp);
                 }
             }
 
-            // Rimuove dalla lista gli impegni già pianificati
             foreach (Impegno i in daRimuovere)
             {
                 daOttimizzare.Remove(i);
             }
 
-            // Restituisce eventuali impegni non pianificati
             return daOttimizzare;
         }
     }
