@@ -55,12 +55,12 @@ namespace ProgettoFinaleInformatica
 
         private void btnOttimizza_Click(object sender, EventArgs e)
         {
-            BindingList<Impegno> binding = new BindingList<Impegno>(g.Ottimizza(impegniDaOttimizzare.ToList()));
-            if (binding.Count == 0) this.Close();
-            else dgvImpegni.DataSource = binding;
+            impegniDaOttimizzare = new BindingList<Impegno>(g.Ottimizza(impegniDaOttimizzare.ToList()));
+            if (impegniDaOttimizzare.Count == 0) this.Close();
+            else dgvImpegni.DataSource = impegniDaOttimizzare;
 
             MessageBox.Show("Ottimizzazione completata!");
-            labelOttimizzazione.Text = "Impegni non ottimizzati: " + binding.Count.ToString() + "\n Ore non sufficienti!!";
+            labelOttimizzazione.Text = "Impegni non ottimizzati: " + impegniDaOttimizzare.Count.ToString() + "\n Ore non sufficienti!!";
 
         }
 
