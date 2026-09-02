@@ -171,7 +171,7 @@ namespace ProgettoFinaleInformatica {
             numGiorno = Convert.ToInt32(giorno);
             numOra = Convert.ToInt32(ora);
 
-            DateTime giornoOra = new DateTime(start.Year, start.Month, start.AddDays(numGiorno).Day, numOra, 0, 0);
+            DateTime giornoOra = new DateTime(start.AddDays(numGiorno).Year, start.AddDays(numGiorno).Month, start.AddDays(numGiorno).Day, numOra, 0, 0);
             FormCreazioneImpegno form = new FormCreazioneImpegno(giornoOra, gestore, this);
 
             if(formCreazioneAttivo == null) {

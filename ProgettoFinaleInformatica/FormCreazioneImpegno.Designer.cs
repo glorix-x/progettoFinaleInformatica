@@ -22,8 +22,7 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
-        {
+        private void InitializeComponent() {
             txtTitolo = new TextBox();
             lblTitolo = new Label();
             rtbDescrizione = new RichTextBox();
@@ -36,61 +35,62 @@
             cbRipetere = new CheckBox();
             txtGiorniDaRipetere = new TextBox();
             label3 = new Label();
+            cbTipoRicorrenza = new ComboBox();
             SuspendLayout();
             // 
             // txtTitolo
             // 
-            txtTitolo.Location = new Point(165, 54);
+            txtTitolo.Location = new Point(206, 68);
             txtTitolo.Margin = new Padding(2);
             txtTitolo.Name = "txtTitolo";
-            txtTitolo.Size = new Size(121, 27);
+            txtTitolo.Size = new Size(150, 31);
             txtTitolo.TabIndex = 0;
             // 
             // lblTitolo
             // 
             lblTitolo.AutoSize = true;
-            lblTitolo.Location = new Point(197, 21);
+            lblTitolo.Location = new Point(246, 26);
             lblTitolo.Margin = new Padding(2, 0, 2, 0);
             lblTitolo.Name = "lblTitolo";
-            lblTitolo.Size = new Size(51, 20);
+            lblTitolo.Size = new Size(61, 25);
             lblTitolo.TabIndex = 1;
             lblTitolo.Text = "Titolo:";
             // 
             // rtbDescrizione
             // 
-            rtbDescrizione.Location = new Point(75, 130);
+            rtbDescrizione.Location = new Point(94, 162);
             rtbDescrizione.Margin = new Padding(2);
             rtbDescrizione.Name = "rtbDescrizione";
-            rtbDescrizione.Size = new Size(308, 130);
+            rtbDescrizione.Size = new Size(384, 162);
             rtbDescrizione.TabIndex = 2;
             rtbDescrizione.Text = "";
             // 
             // lblDescrizione
             // 
             lblDescrizione.AutoSize = true;
-            lblDescrizione.Location = new Point(179, 96);
+            lblDescrizione.Location = new Point(224, 120);
             lblDescrizione.Margin = new Padding(2, 0, 2, 0);
             lblDescrizione.Name = "lblDescrizione";
-            lblDescrizione.Size = new Size(89, 20);
+            lblDescrizione.Size = new Size(106, 25);
             lblDescrizione.TabIndex = 3;
             lblDescrizione.Text = "Descrizione:";
             // 
             // lblDurata
             // 
             lblDurata.AutoSize = true;
-            lblDurata.Location = new Point(75, 274);
+            lblDurata.Location = new Point(94, 342);
             lblDurata.Margin = new Padding(2, 0, 2, 0);
             lblDurata.Name = "lblDurata";
-            lblDurata.Size = new Size(99, 20);
+            lblDurata.Size = new Size(119, 25);
             lblDurata.TabIndex = 5;
             lblDurata.Text = "Durata in ore:";
             // 
             // btnSalva
             // 
-            btnSalva.Location = new Point(270, 356);
+            btnSalva.Location = new Point(338, 445);
             btnSalva.Margin = new Padding(2);
             btnSalva.Name = "btnSalva";
-            btnSalva.Size = new Size(90, 27);
+            btnSalva.Size = new Size(112, 34);
             btnSalva.TabIndex = 6;
             btnSalva.Text = "SALVA";
             btnSalva.UseVisualStyleBackColor = true;
@@ -99,38 +99,38 @@
             // cbDurata
             // 
             cbDurata.FormattingEnabled = true;
-            cbDurata.Location = new Point(46, 308);
+            cbDurata.Location = new Point(58, 385);
             cbDurata.Margin = new Padding(2);
             cbDurata.Name = "cbDurata";
-            cbDurata.Size = new Size(146, 28);
+            cbDurata.Size = new Size(182, 33);
             cbDurata.TabIndex = 7;
             // 
             // lblColore
             // 
             lblColore.AutoSize = true;
-            lblColore.Location = new Point(300, 274);
+            lblColore.Location = new Point(375, 342);
             lblColore.Margin = new Padding(2, 0, 2, 0);
             lblColore.Name = "lblColore";
-            lblColore.Size = new Size(56, 20);
+            lblColore.Size = new Size(68, 25);
             lblColore.TabIndex = 8;
             lblColore.Text = "Colore:";
             // 
             // cbColore
             // 
             cbColore.FormattingEnabled = true;
-            cbColore.Location = new Point(259, 308);
+            cbColore.Location = new Point(324, 385);
             cbColore.Margin = new Padding(2);
             cbColore.Name = "cbColore";
-            cbColore.Size = new Size(146, 28);
+            cbColore.Size = new Size(182, 33);
             cbColore.TabIndex = 9;
             // 
             // cbRipetere
             // 
             cbRipetere.AutoSize = true;
-            cbRipetere.Location = new Point(446, 130);
+            cbRipetere.Location = new Point(580, 153);
             cbRipetere.Margin = new Padding(2);
             cbRipetere.Name = "cbRipetere";
-            cbRipetere.Size = new Size(87, 24);
+            cbRipetere.Size = new Size(103, 29);
             cbRipetere.TabIndex = 10;
             cbRipetere.Text = "Ripetere";
             cbRipetere.UseVisualStyleBackColor = true;
@@ -138,28 +138,39 @@
             // 
             // txtGiorniDaRipetere
             // 
-            txtGiorniDaRipetere.Location = new Point(446, 208);
+            txtGiorniDaRipetere.Location = new Point(516, 248);
             txtGiorniDaRipetere.Margin = new Padding(2);
             txtGiorniDaRipetere.Name = "txtGiorniDaRipetere";
-            txtGiorniDaRipetere.Size = new Size(121, 27);
+            txtGiorniDaRipetere.Size = new Size(111, 31);
             txtGiorniDaRipetere.TabIndex = 11;
             txtGiorniDaRipetere.Visible = false;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(446, 167);
+            label3.Location = new Point(580, 206);
+            label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
-            label3.Size = new Size(137, 20);
+            label3.Size = new Size(121, 25);
             label3.TabIndex = 23;
-            label3.Text = "Ogni quanti giorni?";
+            label3.Text = "Ogni quanto?";
             label3.Visible = false;
+            // 
+            // cbTipoRicorrenza
+            // 
+            cbTipoRicorrenza.FormattingEnabled = true;
+            cbTipoRicorrenza.Location = new Point(657, 248);
+            cbTipoRicorrenza.Name = "cbTipoRicorrenza";
+            cbTipoRicorrenza.Size = new Size(122, 33);
+            cbTipoRicorrenza.TabIndex = 24;
+            cbTipoRicorrenza.Visible = false;
             // 
             // FormCreazioneImpegno
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(640, 417);
+            ClientSize = new Size(800, 521);
+            Controls.Add(cbTipoRicorrenza);
             Controls.Add(label3);
             Controls.Add(txtGiorniDaRipetere);
             Controls.Add(cbRipetere);
@@ -194,5 +205,6 @@
         private CheckBox cbRipetere;
         private TextBox txtGiorniDaRipetere;
         private Label label3;
+        private ComboBox cbTipoRicorrenza;
     }
 }

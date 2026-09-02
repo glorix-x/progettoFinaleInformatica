@@ -11,7 +11,7 @@ namespace ClassLibraryCalendario {
             listaImpegni = JsonSerializer.Deserialize<List<Impegno>>(testo);
         }
 
-        public DateTime GetRicorrenza(Impegno impegno, int index) {
+        public DateTime GetDataRicorrenza(Impegno impegno, int index) {
             /*
              0 = giorni
              1 = settimane
@@ -51,7 +51,7 @@ namespace ClassLibraryCalendario {
                     
                     int c = 0;
 
-                    while((impegno.DataFissata.AddDays(impegno.RipetutoOgni * c).Date - inizio.Date).Days < numGiorni) {
+                    while((GetDataRicorrenza(impegno, c).Date - inizio.Date).Days < numGiorni) {
                         impegni = new List<Impegno>();
                         //Per ogni impegno ricorrente ne creo una copia ricorrente
                         impegni.Add(impegno.CreateImpegnoRicorrente());
@@ -59,7 +59,7 @@ namespace ClassLibraryCalendario {
                         Impegno i = impegni[impegni.Count - 1];
 
                         //Incremento la data dell'impegno in base a ogni quanto si deve ripetere
-                        i.DataFissata = i.DataFissata.AddDays(impegno.RipetutoOgni * c);
+                        i.DataFissata = GetDataRicorrenza(i, c);
                         
                         diff = (i.DataFissata.Date - inizio.Date).Days;
 
@@ -74,8 +74,8 @@ namespace ClassLibraryCalendario {
                                 //Se la sovrapposizone si trova in mezza all'impegno
                                 if(sovrapposizione.DataFissata.CompareTo(i.DataFissata) > 0 && sovrapposizione.DataFissata.AddHours(sovrapposizione.DurataOre).CompareTo(i.DataFissata.AddHours(i.DurataOre)) < 0) {
                                     //Divido l'impegno in due frammenti: uno prima e uno dopo all'ostacolo
-                                    ImpegnoRicorrente i1 = new ImpegnoRicorrente(i.Titolo, i.Descrizione, i.Deadline, i.DataFissata, (sovrapposizione.DataFissata - i.DataFissata).Hours, i.Fisso, i.RipetutoOgni, i.ColoreHex, impegno);
-                                    ImpegnoRicorrente i2 = new ImpegnoRicorrente(i.Titolo, i.Descrizione, i.Deadline, sovrapposizione.DataFissata.AddHours(sovrapposizione.DurataOre), i.DataFissata.Hour + i.DurataOre - (sovrapposizione.DataFissata.Hour + sovrapposizione.DurataOre), i.Fisso, i.RipetutoOgni, i.ColoreHex, impegno);
+                                    ImpegnoRicorrente i1 = new ImpegnoRicorrente(i.Titolo, i.Descrizione, i.Deadline, i.DataFissata, (sovrapposizione.DataFissata - i.DataFissata).Hours, i.Fisso, i.RipetutoOgni, i.TipoRicorrenza, i.ColoreHex, impegno);
+                                    ImpegnoRicorrente i2 = new ImpegnoRicorrente(i.Titolo, i.Descrizione, i.Deadline, sovrapposizione.DataFissata.AddHours(sovrapposizione.DurataOre), i.DataFissata.Hour + i.DurataOre - (sovrapposizione.DataFissata.Hour + sovrapposizione.DurataOre), i.Fisso, i.RipetutoOgni, i.TipoRicorrenza, i.ColoreHex, impegno);
                                     if(i1.DurataOre != 0) {
                                         impegni.Add(i1);
                                     }

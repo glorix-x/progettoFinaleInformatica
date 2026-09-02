@@ -39,7 +39,7 @@ namespace ClassLibraryCalendario {
         public string ColoreHex { get => coloreHex; set => coloreHex = value; }
 
         public ImpegnoRicorrente CreateImpegnoRicorrente() {
-            return new ImpegnoRicorrente(this.Titolo, this.Descrizione, this.Deadline, this.DataFissata, this.DurataOre, this.Fisso, this.RipetutoOgni, this.ColoreHex, this);
+            return new ImpegnoRicorrente(this.Titolo, this.Descrizione, this.Deadline, this.DataFissata, this.DurataOre, this.Fisso, this.RipetutoOgni, this.TipoRicorrenza, this.ColoreHex, this);
         }
 
         public override string ToString() {

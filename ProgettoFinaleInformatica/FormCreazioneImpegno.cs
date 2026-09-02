@@ -9,16 +9,15 @@ using System.Text;
 using System.Windows.Forms;
 
 namespace ProgettoFinaleInformatica {
-    public partial class FormCreazioneImpegno : Form
-    {
+    public partial class FormCreazioneImpegno : Form {
         public static Color[] listaColori = { Color.OrangeRed, Color.LightBlue, Color.LightPink, Color.Yellow, Color.Green };
+        public static string[] tipiRicorrenza = { "Giorno/i", "Settimana/e", "Mese/i", "Anno/i" };
         private GestoreImpegni gestore;
         private DateTime giorno;
         private FormSettimana form;
         private Font font;
 
-        public FormCreazioneImpegno(DateTime giorno, GestoreImpegni gestore, FormSettimana form)
-        {
+        public FormCreazioneImpegno(DateTime giorno, GestoreImpegni gestore, FormSettimana form) {
             InitializeComponent();
             this.gestore = gestore;
             this.giorno = giorno;
@@ -32,61 +31,49 @@ namespace ProgettoFinaleInformatica {
 
             //Preso il prossimo impegno determino il numero di ore massime che può durare l'impegno da creare
             Impegno prossimoImpegno = gestore.GetNextImpegno(giorno);
-            if (prossimoImpegno != null && prossimoImpegno.DataFissata.Date.CompareTo(giorno.Date) == 0)
-            {
+            if(prossimoImpegno != null && prossimoImpegno.DataFissata.Date.CompareTo(giorno.Date) == 0) {
                 //Se il prossimo impegno è nello stesso giorno conto la differenza di ore
                 DateTime oraProssimoImpegno = prossimoImpegno.DataFissata;
                 numOreMax = oraProssimoImpegno.Hour - giorno.Hour;
-            }
-            else
-            {
+            } else {
                 //Altrimenti conto le ore fino alla fine della giornata
                 numOreMax = 24 - giorno.Hour;
             }
 
             List<int> listaOre = new List<int>();
 
-            for (int i = 1; i <= numOreMax; i++)
-            {
+            for(int i = 1; i <= numOreMax; i++) {
                 listaOre.Add(i);
             }
 
+            cbTipoRicorrenza.DataSource = tipiRicorrenza;
             cbColore.DataSource = listaColori;
             cbDurata.DataSource = listaOre;
         }
 
-        private void btnSalva_Click(object sender, EventArgs e)
-        {
+        private void btnSalva_Click(object sender, EventArgs e) {
             string titolo = txtTitolo.Text;
             string descrizione = rtbDescrizione.Text;
             int durata = Convert.ToInt32(cbDurata.Text);
             Color colore = listaColori[cbColore.SelectedIndex];
 
             //Controllo che siano stati compilati tutti i campi
-            if (titolo.Trim() == "" || descrizione.Trim() == "")
-            {
+            if(titolo.Trim() == "" || descrizione.Trim() == "") {
                 MessageBox.Show("Compilare tutti i campi");
-            }
-            else
-            {
+            } else {
                 bool errore = false;
                 int ripetereOgni = 0;
-                if (cbRipetere.Checked)
-                {
-                    try
-                    {
+                if(cbRipetere.Checked) {
+                    try {
                         ripetereOgni = Convert.ToInt32(txtGiorniDaRipetere.Text.Trim());
-                    }
-                    catch (Exception ex)
-                    {
+                    } catch(Exception ex) {
                         MessageBox.Show("Inserire un numero valido come giorni da ripetere");
                         errore = true;
                     }
                 }
-                if (!errore)
-                {
+                if(!errore) {
                     //Creo l'impegno e lo aggiungo al gestore e alla griglia
-                    Impegno nuovoImpegno = new Impegno(titolo, descrizione, giorno, giorno, durata, true, ripetereOgni, ColoreHex(colore));
+                    Impegno nuovoImpegno = new Impegno(titolo, descrizione, giorno, giorno, durata, true, ripetereOgni, cbTipoRicorrenza.SelectedIndex, ColoreHex(colore));
                     gestore.AddImpegno(nuovoImpegno);
                     form.Aggiorna();
                     form.Show();
@@ -95,27 +82,23 @@ namespace ProgettoFinaleInformatica {
             }
         }
 
-        private string ColoreHex(Color colore)
-        {
+        private string ColoreHex(Color colore) {
             return $"#{colore.R:X2}{colore.G:X2}{colore.B:X2}";
         }
 
-        private void FormCreazioneImpegno_Load(object sender, EventArgs e)
-        {
+        private void FormCreazioneImpegno_Load(object sender, EventArgs e) {
             this.BackColor = Color.LightYellow;
         }
 
-        private void cbRipetere_CheckedChanged(object sender, EventArgs e)
-        {
-            if(cbRipetere.Checked)
-            {
+        private void cbRipetere_CheckedChanged(object sender, EventArgs e) {
+            if(cbRipetere.Checked) {
                 label3.Show();
                 txtGiorniDaRipetere.Show();
-            }
-            else
-            {
+                cbTipoRicorrenza.Show();
+            } else {
                 label3.Hide();
                 txtGiorniDaRipetere.Hide();
+                cbTipoRicorrenza.Hide();
             }
         }
     }
