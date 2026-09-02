@@ -10,9 +10,10 @@ namespace ClassLibraryCalendario {
         private int durataOre;
         private bool fisso;
         private int ripetutoOgni;
+        private int tipoRicorrenza;
         private string coloreHex;
 
-        public Impegno(string titolo, string descrizione, DateTime deadline, DateTime dataFissata, int durataOre, bool fisso, int ripetutoOgni, string coloreHex) {
+        public Impegno(string titolo, string descrizione, DateTime deadline, DateTime dataFissata, int durataOre, bool fisso, int ripetutoOgni, int tipoRicorrenza, string coloreHex) {
             this.titolo = titolo;
             this.descrizione = descrizione;
             this.deadline = deadline;
@@ -20,6 +21,7 @@ namespace ClassLibraryCalendario {
             this.durataOre = durataOre;
             this.fisso = fisso;
             this.ripetutoOgni = ripetutoOgni;
+            this.tipoRicorrenza = tipoRicorrenza;
             this.coloreHex = coloreHex;
         }
 
@@ -33,6 +35,7 @@ namespace ClassLibraryCalendario {
         public bool Fisso { get => fisso; set => fisso = value; }
         [Browsable(false)]
         public int RipetutoOgni { get => ripetutoOgni; set => ripetutoOgni = value; }
+        public int TipoRicorrenza { get => tipoRicorrenza; set => tipoRicorrenza = value; }
         public string ColoreHex { get => coloreHex; set => coloreHex = value; }
 
         public ImpegnoRicorrente CreateImpegnoRicorrente() {

@@ -11,6 +11,25 @@ namespace ClassLibraryCalendario {
             listaImpegni = JsonSerializer.Deserialize<List<Impegno>>(testo);
         }
 
+        public DateTime GetRicorrenza(Impegno impegno, int index) {
+            /*
+             0 = giorni
+             1 = settimane
+             2 = mesi
+             3 = anni
+            */
+            if (impegno.TipoRicorrenza == 0) {
+                return impegno.DataFissata.AddDays(impegno.RipetutoOgni * index);
+            } else if (impegno.TipoRicorrenza == 1) {
+                return impegno.DataFissata.AddDays(impegno.RipetutoOgni * 7 * index);
+            } else if (impegno.TipoRicorrenza == 2) {
+                return impegno.DataFissata.AddMonths(impegno.RipetutoOgni * index);
+            } else if (impegno.TipoRicorrenza == 3) {
+                return impegno.DataFissata.AddYears(impegno.RipetutoOgni * index);
+            }
+            return impegno.DataFissata;
+        }
+
         public List<Impegno> GetListaImpegni(DateTime inizio, int numGiorni) {
             //Ordino la lista degli impegni in base a se sono ripetuti o no
             //Poi in base alla durata
