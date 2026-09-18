@@ -184,14 +184,26 @@ namespace ClassLibraryCalendario {
         }
         public List<Impegno> Ottimizza(List<Impegno> daOttimizzare)
         {
-            // Ordina gli impegni:
-            // prima per scadenza più vicina,
-            // poi per durata maggiore
+            List<Impegno> nonFissi = new List<Impegno>();
+            foreach (Impegno i in listaImpegni)
+            {
+                if (i.Fisso == false)
+                {
+                    nonFissi.Add(i);
+                }
+            }
+
+            daOttimizzare.AddRange(nonFissi);
+
+            foreach (Impegno i in nonFissi)
+            {
+                listaImpegni.Remove(i);
+            }
+
             daOttimizzare = daOttimizzare
                 .OrderBy(i => i.Deadline)
                 .ThenByDescending(i => i.DurataOre)
                 .ToList();
-
             // Lista degli impegni che verranno pianificati correttamente
             List<Impegno> daRimuovere = new List<Impegno>();
 
@@ -256,7 +268,7 @@ namespace ClassLibraryCalendario {
 
                 if (trovato)
                 {
-                    
+
                     AddImpegno(imp);
 
                     daRimuovere.Add(imp);
